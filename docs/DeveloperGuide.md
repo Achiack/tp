@@ -285,16 +285,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Food Bridge` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a contact, providing relevant information.
+2.  Food Bridge adds the contact to the list.
+3.  Food Bridge shows the list of persons.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The number given is invalid.
+  
+  * 2a1. Food Bridge shows an error message.
+    
+    Use case resumes at step 1.
+
+
+* 2b. The address given is invalid.
+  
+  * 2b1. Food Bridge shows an error message.
+    
+    Use case resumes at step 1.
+
+
+* 2c. No order is given.
+  
+  * 2c1. Food Bridge shows an error message.
+    
+    Use case resumes at step 1.
+
+
+* 2d. Contact is a duplicate - all information exactly matches a contact already in the list.
+  
+  * 2d1. Food Bridge adds the order to the already-stored contact.
+    
+    Use case ends.
+
+
+
+**Use case: Delete a contact**
+
+**MSS**
+
+1.  User requests to list persons.
+2.  Food Bridge shows a list of persons.
+3.  User requests to delete a specific person in the list.
+4.  Food Bridge deletes the person.
 
     Use case ends.
 
@@ -306,9 +347,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Food Bridge shows an error message.
 
       Use case resumes at step 2.
+
+
+**Use case: List all contacts**
+
+**MSS**
+
+1.  User requests to list persons.
+2.  Food Bridge shows a list of persons.
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+
+**Use case: List all orders**
+
+**MSS**
+
+1.  User requests to list orders.
+2.  Food Bridge shows a list of orders, and the details of the customer who made the order.
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty. 
+  
+  Use case ends.
 
 *{More to be added}*
 
