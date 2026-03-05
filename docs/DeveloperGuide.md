@@ -276,25 +276,23 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                               | I want to …​                                       | So that I can…​                                                        |
-| -------- |----------------------------------------------------------|-------------------------------------------------------|---------------------------------------------------------------------------|
-| `* * *`  | user                                                     | add a new contact with name, address and phone number | record the customer's details to the system.                              | 
-| `* * *`  | user                                                     | delete a contact                                      | remove contacts from the system that no longer order from the restaurant. |
-| `* * *`  | user                                                     | add an order                                          | save the details of an order and the customer who ordered it.             |
-| `* * *`  | user                                                     | add a scheduled order                                 | add an order for later, ahead of time.                                    |
-| `* * *`  | user                                                     | delete an order                                       | remove wrongly-keyed orders in the system.                                |
-| `* * *`  | restaurant employee                                      | mark an order as completed                            | keep track of which orders are completed.                                 |
-| `* *`    | new user                                                 | follow the walkthrough                                | learn to use the main features of the app.                                |
-| `* *`    | user                                                     | select an existing contact while adding an order      | save time by not retyping the same details.                               |
-| `* *`    | careless user                                            | undo deletion or edition of an order                  | restore the data.                                                         |
-| `* *`    | restaurant delivery worker troubled by regional delivery | find all active orders with a specific region tag     | filter the orders and find all the orders in specific regions.            |
-| `* *`    | restaurant delivery worker                               | sort orders by waiting time                           | prioritize deliveries that have been waiting too long.                    |
-| `* *`    | restaurant manager                                       | see the statistics of the restaurant's orders         | see which menu items are the most popular.                                |
-| `* *`    | restaurant manager                                       | keep track of the number of food items ordered        | know which items are favoured by customers.                               |
-| `*`      | experienced user                                         | pin important orders                                  | easily view them later if required.                                       |
-| `*`      | experienced user                                         | copy the customer's phone number                      | easily paste the number to Whatsapp to call the customer.                 |
-| `*`      | user                                                     | be alerted if I add an identical contact              | avoid adding the same customer twice by mistake.                          |
-| `*`      | restaurant employee                                      | clear all order data                                  | reset the number of orders in the system every day.                       |
-| `*`      | busy user                                                | mark a whole region's order at once                   | save time if I forgot to mark orders in the same region.                  |
+| ------ |----------------------------------------------------------|-------------------------------------------------------|---------------------------------------------------------------------------|
+| `* * *` | user                                                     | add a new contact with name, address and phone number | record the customer's details to the system.                              | 
+| `* * *` | user                                                     | delete a contact                                      | remove contacts from the system that no longer order from the restaurant. |
+| `* * *` | user                                                     | add an order                                          | save the details of an order and the customer who ordered it.             |
+| `* * *` | user                                                     | delete an order                                       | remove wrongly-keyed orders in the system.                                |
+| `* * *` | restaurant employee                                      | mark an order as completed                            | keep track of which orders are completed.                                 |
+| `* *`  | new user                                                 | follow the walkthrough                                | learn to use the main features of the app.                                |
+| `* *`  | user                                                     | select an existing contact while adding an order      | save time by not retyping the same details.                               |
+| `* *`  | user                                                     | add a scheduled order                                 | add an order for later, ahead of time.                                    |
+| `* *`  | careless user                                            | undo deletion or edition of an order                  | restore the data.                                                         |
+| `* *`  | restaurant delivery worker troubled by regional delivery | find all active orders with a specific region tag     | filter the orders and find all the orders in specific regions.            |
+| `* *`  | restaurant delivery worker                               | sort orders by waiting time                           | prioritize deliveries that have been waiting too long.                    |
+| `* *`  | restaurant manager                                       | see the statistics of the restaurant's orders         | see which menu items are the most popular.                                |
+| `* *`  | restaurant manager                                       | keep track of the number of food items ordered        | know which items are favoured by customers.                               |
+| `*`    | experienced user                                         | pin important orders                                  | easily view them later if required.                                       |
+| `*`    | experienced user                                         | copy the customer's phone number                      | easily paste the number to Whatsapp to call the customer.                 |
+| `*`    | user                                                     | be alerted if I add an identical contact              | avoid adding the same customer twice by mistake.                          |
 
 *{More to be added}*
 
