@@ -1,4 +1,42 @@
 package seedu.address.model.order;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 public class Quantity {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Quantity must be a positive integer.";
+
+    public final int value;
+
+    public Quantity(String quantity) {
+        requireNonNull(quantity);
+        checkArgument(isValidQuantity(quantity), MESSAGE_CONSTRAINTS);
+        value = Integer.parseInt(quantity);
+    }
+
+    public static boolean isValidQuantity(String test) {
+        try {
+            return Integer.parseInt(test) > 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof Quantity
+                && value == ((Quantity) other).value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(value);
+    }
 }

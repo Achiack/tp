@@ -1,4 +1,7 @@
 package seedu.address.model.order;
 
-public class OrderStatus {
+public enum OrderStatus {
+    PENDING,
+    COMPLETED,
+    CANCELLED
 }

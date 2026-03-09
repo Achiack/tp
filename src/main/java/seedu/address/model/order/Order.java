@@ -3,7 +3,6 @@ package seedu.address.model.order;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -16,9 +15,9 @@ public class Order {
     private final Quantity quantity;
     private final Price price;
     private final OrderStatus status;
-    private final LocalDate orderDate;
+    private final OrderDate orderDate;
 
-    public Order(OrderId orderId, Person person, Product product, Quantity quantity, Price price, OrderStatus status, LocalDate orderDate) {
+    public Order(OrderId orderId, Person person, Product product, Quantity quantity, Price price, OrderStatus status, OrderDate orderDate) {
         requireAllNonNull(orderId, product, quantity, price, status, orderDate);
         this.orderId = orderId;
         this.person = person;
@@ -53,7 +52,7 @@ public class Order {
         return status;
     }
 
-    public LocalDate getDate() {
+    public OrderDate getDate() {
         return orderDate;
     }
 
