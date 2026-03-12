@@ -116,6 +116,12 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /**
+     * Updates the filter of the filtered order list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredOrderList(Predicate<Order> predicate);
+
     //=========== Undo/Redo =================================================================================
     //@@author wangyida-reused
     //Reused from https://github.com/se-edu/addressbook-level4
