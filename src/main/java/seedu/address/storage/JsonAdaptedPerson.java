@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -60,8 +61,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value.toString();
+        email = Optional.ofNullable(source.getEmail()).map(e -> e.value).orElse("");
+        address = source.getAddress().toString();
         region = source.getRegion().value;
         orders.addAll(source.getOrders());
         tags.addAll(source.getTags().stream()
@@ -111,13 +112,15 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
 
-        Address modelAddress = null;
+        Address modelAddress;
 
-        if (address.contains("=")) {
-            if (!Address.isValidUnit(address.substring(7))) {
+        if (address.contains(", ")) {
+            String postalCode = address.substring(0,6);
+            String unitNo = address.substring(8);
+            if (!Address.isValidUnit(unitNo)) {
                 throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS_UNIT);
             }
-            modelAddress = new Address(address.substring(0,6), address.substring(7));
+            modelAddress = new Address(postalCode, unitNo);
         } else {
             modelAddress = new Address(address.substring(0,6));
         }
