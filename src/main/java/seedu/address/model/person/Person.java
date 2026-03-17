@@ -25,35 +25,18 @@ public class Person {
     // Data fields
     private final Address address;
     private final Region region;
-    private final ArrayList<String> orders = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field except email must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Region region, String order, Set<Tag> tags) {
-        requireAllNonNull(name, phone, address, region, order, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Region region, Set<Tag> tags) {
+        requireAllNonNull(name, phone, address, region, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.region = region;
-        this.orders.add(order);
-        this.tags.addAll(tags);
-    }
-
-    /**
-     * Every field must be present and not null. For adding a list of multiple orders.
-     */
-    public Person(Name name, Phone phone, Email email, Address address,
-                  Region region, ArrayList<String> orders, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, region, orders, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.region = region;
-        this.orders.addAll(orders);
         this.tags.addAll(tags);
     }
 
@@ -75,14 +58,6 @@ public class Person {
 
     public Region getRegion() {
         return region;
-    }
-
-    public ArrayList<String> getOrders() {
-        return orders;
-    }
-
-    public String getLastOrder() {
-        return orders.get(orders.size() - 1);
     }
 
     /**
@@ -144,7 +119,6 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("region", region)
-                .add("orders", orders)
                 .add("tags", tags)
                 .toString();
     }
