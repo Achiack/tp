@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
+import seedu.address.model.order.Order;
+import seedu.address.model.person.Person;
 
 /** for adding a new order with a returning customer **/
 
@@ -20,12 +20,12 @@ public class OrderCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 " + "o/ 1 1 o/ 2 4 \n"
             + "This means customer 1 ordered 1 of menu item 1 and 4 of menu item 2.";
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
+    public static final String MESSAGE_SUCCESS = "New order added: %1$s.";
 
-    private final Index index;
-    private Map<Integer, Integer> order = new HashMap<>();
+    private final int index;
+    private final Map<Integer, Integer> order;
 
-    public OrderCommand(Index index, Map<Integer, Integer> order) {
+    public OrderCommand(int index, Map<Integer, Integer> order) {
         requireAllNonNull(index, order);
         this.index = index;
         this.order = order;
@@ -33,7 +33,11 @@ public class OrderCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult("i want food");
+        Person person = model.getPerson(index);
+        Order toAdd = new Order(person, this.order);
+        model.addOrder(toAdd);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.toString()));
     }
 
     @Override
@@ -48,7 +52,6 @@ public class OrderCommand extends Command {
         }
 
         OrderCommand e = (OrderCommand) other;
-        return index.equals(e.index)
-                && order.equals(e.order);
+        return index == e.index && order.equals(e.order);
     }
 }

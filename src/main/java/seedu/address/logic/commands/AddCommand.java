@@ -41,7 +41,7 @@ public class AddCommand extends Command {
             + PREFIX_ORDERS + "1 2"
             + PREFIX_ORDERS + "2 5";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New person added: %1$s. New order added: %2$s.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
@@ -68,7 +68,7 @@ public class AddCommand extends Command {
         model.addPerson(toAdd);
         model.addOrder(newOrder);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd), newOrder.toString()));
     }
 
     @Override

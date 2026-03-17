@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDERS;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.OrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -26,9 +25,8 @@ public class OrderCommandParser implements Parser<OrderCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OrderCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(
-                PREFIX_CUSTOMERIDX);
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CUSTOMERIDX).get());
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CUSTOMERIDX);
+        int index = Integer.parseInt(argMultimap.getValue(PREFIX_CUSTOMERIDX).get());
         Map<Integer, Integer> order = ParserUtil.parseOrders(argMultimap.getAllValues(PREFIX_ORDERS));
 
         return new OrderCommand(index, order);
