@@ -69,7 +69,7 @@ public class Order {
         return status;
     }
 
-    public OrderDateTime getDate() {
+    public OrderDateTime getDatetime() {
         return orderDatetime;
     }
 
@@ -116,11 +116,9 @@ public class Order {
         return new ToStringBuilder(this)
                 .add("orderId", orderId)
                 .add("person", person)
-/**
-                .add("product", product)
-                .add("quantity", quantity)
-                .add("price", price)
- **/
+//                .add("product", product)
+//                .add("quantity", quantity)
+//                .add("price", price)
                 .add("status", status)
                 .add("orderDatetime", orderDatetime)
                 .toString();

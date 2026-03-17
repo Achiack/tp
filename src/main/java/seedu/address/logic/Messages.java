@@ -56,7 +56,7 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(order.getOrderId())
                 .append("; Ordered at: ")
-                .append(order.getDate())
+                .append(order.getDatetime())
                 .append("; Order Status: ")
                 .append(order.getOrderStatus())
                 .append("; Ordered by: ")
