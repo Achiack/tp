@@ -24,7 +24,9 @@ public class OrderMap {
         this.orderDatetime = new OrderDateTime(LocalDateTime.now());
     }
 
-    public Person getPerson() { return person; }
+    public Person getPerson() {
+        return person;
+    }
 
     public int getOrderId() {
         return orderId;
@@ -47,7 +49,7 @@ public class OrderMap {
      * This defines a stronger notion of equality between two orders.
      */
     @Override
-    public boolean equals(Object other) {
+    public boolean isSameOrder(Object other) {
         if (other == this) {
             return true;
         }
@@ -73,5 +75,7 @@ public class OrderMap {
                 .add("orderDatetime", orderDatetime)
                 .add("orderMap", orderMap.toString())
                 .toString();
+    }
+
     }
 }

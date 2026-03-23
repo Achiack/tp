@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 
 import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderMap;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -42,9 +43,9 @@ public class OrderBuilder {
         orders = DEFAULT_ORDERMAP;
     }
 
-    public OrderBuilder(Order orderToCopy) {
+    public OrderBuilder(OrderMap orderToCopy) {
         person = orderToCopy.getPerson();
-        orders = new HashMap<>(orderToCopy.getOrders());
+        orders = new HashMap<>(orderToCopy.getOrderMap());
     }
 
     /**
@@ -69,12 +70,12 @@ public class OrderBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
     public OrderBuilder withOrder(String ... orders) {
-        this.orders = SampleDataUtil.getOrderMap(orders);
+        this.orders = SampleDataUtil.parseOrders(orders);
         return this;
     }
 
-    public Order build() {
-        return new Order(person, orders);
+    public OrderMap build() {
+        return new OrderMap(person, orders);
     }
 
 }
