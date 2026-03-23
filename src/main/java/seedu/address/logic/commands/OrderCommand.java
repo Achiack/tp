@@ -19,7 +19,7 @@ public class OrderCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": adds a new order made by a returning customer. "
             + "Parameters: CUSTOMER_INDEX (must be a positive integer) "
-            + "o/ [MENU_ITEM PRODUCT_QUANTITY]\n"
+            + PREFIX_ORDERS + "MENU_ITEM PRODUCT_QUANTITY...\n"
             + "Example: " + COMMAND_WORD + PREFIX_CUSTOMERIDX + " 1 " + PREFIX_ORDERS + "1 1" + PREFIX_ORDERS + "2 4\n"
             + "This means customer 1 ordered 1 of menu item 1 and 4 of menu item 2.";
 
