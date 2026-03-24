@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.order.ProductQuantityPair;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -188,5 +189,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String productQuantityPair} into a {@code ProductQuantityPair}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code productQuantityPair} is invalid.
+     */
+    public static ProductQuantityPair parseProductQuantityPair(String productQuantityPair) throws ParseException {
+        requireNonNull(productQuantityPair);
+        String trimmedOrder = productQuantityPair.trim();
+        if (!ProductQuantityPair.isValidProductQuantityPair(trimmedOrder)) {
+            throw new ParseException(ProductQuantityPair.MESSAGE_CONSTRAINTS);
+        }
+        return new ProductQuantityPair(trimmedOrder);
     }
 }

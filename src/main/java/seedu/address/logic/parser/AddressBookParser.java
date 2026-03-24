@@ -77,6 +77,9 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case seedu.address.logic.commands.order.EditCommand.COMMAND_WORD:
+            return new seedu.address.logic.parser.order.EditCommandParser().parse(arguments);
+
         case seedu.address.logic.commands.order.ListCommand.COMMAND_WORD:
             return new seedu.address.logic.commands.order.ListCommand();
 
