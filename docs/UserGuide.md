@@ -77,15 +77,15 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER a/POSTAL_CODE [u/UNIT_NUMBER] r/REGION [t/TAG]…​`
+Format: `addperson n/NAME p/PHONE_NUMBER a/POSTAL_CODE [u/UNIT_NUMBER] r/REGION [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 a/111111 u/#01-01 r/N`
-* `add n/Betsy Crowe p/87243155 a/110022 r/C t/loyal customer`
+* `addperson n/John Doe p/98765432 a/111111 u/#01-01 r/N`
+* `addperson n/Betsy Crowe p/87243155 a/110022 r/C t/loyal customer`
 
 ### Listing all persons : `list`
 
@@ -141,6 +141,20 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Adding an order: `addorder`
+
+Adds an order to the address book.
+
+Format: `addorder c/CUSTOMER_INDEX o/MENU_ITEM QUANTITY_ORDERED…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have any number of orders (excluding 0)
+</div>
+
+Examples:
+* `addorder c/1 o/2 5`
+* `addorder c/2 o/1 1 o/2 3 o/4 2`
 
 ### Clearing all entries : `clear`
 
