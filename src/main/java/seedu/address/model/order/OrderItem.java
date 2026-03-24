@@ -68,7 +68,7 @@ public class OrderItem {
      * Returns true if both orders have the same name.
      * This defines a weaker notion of equality between two orders.
      */
-    public boolean isSameOrder(Order otherOrder) {
+    public boolean isSameOrder(OrderItem otherOrder) {
         if (otherOrder == this) {
             return true;
         }
@@ -87,11 +87,11 @@ public class OrderItem {
             return true;
         }
 
-        if (!(other instanceof Order)) {
+        if (!(other instanceof OrderItem)) {
             return false;
         }
 
-        Order otherOrder = (Order) other;
+        OrderItem otherOrder = (OrderItem) other;
         return orderId.equals(otherOrder.orderId)
                 && product.equals(otherOrder.product)
                 && quantity.equals(otherOrder.quantity);

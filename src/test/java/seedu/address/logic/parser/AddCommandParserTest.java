@@ -45,10 +45,9 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.order.Order;
+import seedu.address.logic.commands.person.AddCommand;
+import seedu.address.logic.parser.person.AddCommandParser;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -62,12 +61,11 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
-        Order expectedOrder = new OrderBuilder(BOB_ORDER).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + REGION_DESC_BOB + ORDER_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedPerson, expectedOrder));
+                new AddCommand(expectedPerson));
 
 
         // multiple tags - all accepted
@@ -76,7 +74,7 @@ public class AddCommandParserTest {
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + REGION_DESC_BOB
                         + ORDER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddCommand(expectedPersonMultipleTags, expectedOrder));
+                new AddCommand(expectedPersonMultipleTags));
     }
 
     @Test
@@ -156,10 +154,9 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        Order expectedOrder = new OrderBuilder(BOB_ORDER).build();
 
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + REGION_DESC_AMY + ORDER_DESC_AMY, new AddCommand(expectedPerson, expectedOrder));
+                + REGION_DESC_AMY + ORDER_DESC_AMY, new AddCommand(expectedPerson));
     }
 
     @Test
@@ -202,11 +199,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGION_DESC_BOB + ORDER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Phone.MESSAGE_CONSTRAINTS);
-
-        // invalid email
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + REGION_DESC_BOB + ORDER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC

@@ -1,8 +1,8 @@
 package seedu.address.model.order;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
@@ -44,12 +44,21 @@ public class OrderMap {
         return orderDatetime;
     }
 
+    public boolean isSameOrder(OrderMap otherOrder) {
+        if (otherOrder == this) {
+            return true;
+        }
+
+        return otherOrder != null
+                && otherOrder.getOrderId() == getOrderId();
+    }
+
     /**
      * Returns true if both orders have the same identity and data fields.
      * This defines a stronger notion of equality between two orders.
      */
     @Override
-    public boolean isSameOrder(Object other) {
+    public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
@@ -67,6 +76,11 @@ public class OrderMap {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(orderId, person, orderMap);
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("orderId", orderId)
@@ -75,7 +89,5 @@ public class OrderMap {
                 .add("orderDatetime", orderDatetime)
                 .add("orderMap", orderMap.toString())
                 .toString();
-    }
-
     }
 }

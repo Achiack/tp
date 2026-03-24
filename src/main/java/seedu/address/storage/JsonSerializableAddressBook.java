@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderMap;
 import seedu.address.model.person.Person;
 
 /**
@@ -73,7 +73,7 @@ class JsonSerializableAddressBook {
                     .findFirst()
                     .orElseThrow(() -> new IllegalValueException("Person not found for order"));
 
-            Order order = jsonOrder.toModelType(person);
+            OrderMap order = jsonOrder.toModelType(person);
             addressBook.addOrder(order);
         }
         return addressBook;

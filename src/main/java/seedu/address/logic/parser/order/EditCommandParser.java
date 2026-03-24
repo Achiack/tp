@@ -2,13 +2,8 @@ package seedu.address.logic.parser.order;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMERIDX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDERS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNO;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,7 +14,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.person.EditCommand;
-import seedu.address.logic.commands.person.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -40,8 +34,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_ADDRESS, PREFIX_UNITNO, PREFIX_REGION, PREFIX_ORDERS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_CUSTOMERIDX, PREFIX_ORDERS);
 
         Index index;
 
@@ -51,39 +44,18 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE,
-                PREFIX_ADDRESS, PREFIX_UNITNO, PREFIX_REGION);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CUSTOMERIDX);
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            String postalCode = argMultimap.getValue(PREFIX_ADDRESS).get();
-            editPersonDescriptor.setPostalCode(ParserUtil.parsePostalCode(postalCode));
-        }
-        if (argMultimap.getValue(PREFIX_UNITNO).isPresent()) {
-            String unitNo = argMultimap.getValue(PREFIX_UNITNO).get();
-            editPersonDescriptor.setUnitNo(ParserUtil.parseUnitNo(unitNo));
-        }
-        if (argMultimap.getValue(PREFIX_REGION).isPresent()) {
-            editPersonDescriptor.setRegion(ParserUtil.parseRegion(argMultimap.getValue(PREFIX_REGION).get()));
-        }
+        /*
         if (argMultimap.getValue(PREFIX_ORDERS).isPresent()) {
-            editPersonDescriptor.setOrder(
-                    new ArrayList<>(List.of(ParserUtil.parseOrder(argMultimap.getValue(PREFIX_ORDERS).get()))));
+            editPersonDescriptor.setOrder(new ArrayList<>(List.of(ParserUtil.parseOrder(argMultimap.getValue(PREFIX_ORDERS).get()))));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-
-        return new EditCommand(index, editPersonDescriptor);
+        */
+        return null; // new EditCommand(index, editPersonDescriptor);
     }
 
     /**
@@ -91,6 +63,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
+/*
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
 
@@ -101,4 +74,5 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+*/
 }
