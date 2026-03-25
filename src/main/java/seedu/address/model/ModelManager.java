@@ -109,7 +109,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteOrder(Order target) {
-        versionedAddressBook.removeOrder(target);
+        this.versionedAddressBook.removeOrder(target);
     }
 
     @Override
