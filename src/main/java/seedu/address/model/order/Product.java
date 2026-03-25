@@ -1,6 +1,5 @@
 package seedu.address.model.order;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -28,12 +27,16 @@ public class Product {
         this.index = idx;
         name = product;
         this.price = price;
-        idx ++;
+        idx++;
     }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public double getPrice() { return price; }
+    public double getPrice() {
+        return price;
+    }
 
     @Override
     public String toString() {

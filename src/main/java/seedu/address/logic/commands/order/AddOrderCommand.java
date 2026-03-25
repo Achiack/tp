@@ -31,6 +31,11 @@ public class AddOrderCommand extends Command {
     private final int index;
     private final Map<Integer, Integer> order;
 
+    /**
+     * Create an AddOrderCommand.
+     * @param index The person index
+     * @param order The OrderMap
+     */
     public AddOrderCommand(int index, Map<Integer, Integer> order) {
         requireAllNonNull(index, order);
         this.index = index;

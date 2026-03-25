@@ -1,14 +1,10 @@
 package seedu.address.logic.commands.order;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.model.ModelManager;
 
 public class AddOrderCommandTest {
     @Test

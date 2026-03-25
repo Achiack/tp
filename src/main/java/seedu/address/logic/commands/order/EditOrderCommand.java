@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -18,8 +17,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.OrderMap;
-import seedu.address.model.order.Product;
-import seedu.address.model.order.Quantity;
+import seedu.address.model.order.ProductList;
 
 /**
  * Edits the details of an existing order in the address book.
@@ -39,6 +37,8 @@ public class EditOrderCommand extends Command {
 
     public static final String MESSAGE_EDIT_ORDER_SUCCESS = "Order edited successfully.\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_EMPTY_ORDER = "An order must have at least one item.";
+    public static final String MESSAGE_INVALID_ITEM = "Invalid menu item index: %d";
 
     private final Index index;
     private final EditOrderDescriptor editOrderDescriptor;
@@ -76,30 +76,46 @@ public class EditOrderCommand extends Command {
      * Creates and returns an {@code Order} with the details of {@code orderToEdit}
      * edited with {@code editOrderDescriptor}.
      */
-    private static OrderMap createEditedOrderMap(OrderMap orderToEdit, EditOrderDescriptor editOrderDescriptor) {
+    private static OrderMap createEditedOrderMap(
+            OrderMap orderToEdit, EditOrderDescriptor editOrderDescriptor) throws CommandException {
         assert orderToEdit != null;
 
-//        Product updatedProduct = editOrderDescriptor.getProduct().orElse(orderToEdit.getProduct());
-//        Integer updatedQuantity = editOrderDescriptor.getQuantity();
-//
-//        if (updatedQuantity == 0) {
-//            System.out.println("Zero quantity entered. This functionality hasn't been implemented yet.");
-//            return orderToEdit;
-//        }
-//
-//        Quantity positiveQuantity = new Quantity(updatedQuantity.toString());
+        Map<Integer, Integer> updatedOrderMap = getUpdatedOrderMap(orderToEdit, editOrderDescriptor);
 
-        Map<Integer, Integer> orderMap = editOrderDescriptor.getOrderMap();
-        Map<Integer, Integer> updatedOrderMap = new HashMap<>();
-
-        for (Map.Entry<Integer, Integer> entry : orderMap.entrySet()) {
-            if (entry.getValue() != 0) {
-                updatedOrderMap.put(entry.getKey(), entry.getValue());
-            }
+        if (updatedOrderMap.isEmpty()) {
+            throw new CommandException(MESSAGE_EMPTY_ORDER);
         }
 
         return new OrderMap(orderToEdit.getOrderId(), orderToEdit.getPerson(), updatedOrderMap,
                 orderToEdit.getStatus(), orderToEdit.getOrderDatetime());
+    }
+
+    /**
+     * Returns the updated order map based on the {@code EditOrderDescriptor}.
+     * @param orderToEdit The original order
+     * @param editOrderDescriptor The order descriptor with the new order items
+     */
+    private static Map<Integer, Integer> getUpdatedOrderMap(
+            OrderMap orderToEdit, EditOrderDescriptor editOrderDescriptor) throws CommandException {
+        Map<Integer, Integer> newOrders = editOrderDescriptor.getOrderMap();
+        Map<Integer, Integer> updatedOrderMap = new HashMap<>();
+
+        for (Map.Entry<Integer, Integer> item : newOrders.entrySet()) {
+            if (!new ProductList().isValidItem(item.getKey())) {
+                throw new CommandException(String.format(MESSAGE_INVALID_ITEM, item.getKey()));
+            }
+
+            if (item.getValue() != 0) {
+                updatedOrderMap.put(item.getKey(), item.getValue());
+            }
+        }
+
+        for (Map.Entry<Integer, Integer> item : orderToEdit.getOrderMap().entrySet()) {
+            if (!newOrders.containsKey(item.getKey())) {
+                updatedOrderMap.put(item.getKey(), item.getValue());
+            }
+        }
+        return updatedOrderMap;
     }
 
     @Override

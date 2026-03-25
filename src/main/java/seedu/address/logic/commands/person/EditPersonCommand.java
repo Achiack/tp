@@ -112,7 +112,7 @@ public class EditPersonCommand extends Command {
         Region updatedRegion = editPersonDescriptor.getRegion().orElse(personToEdit.getRegion());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedAddress, updatedRegion,updatedTags);
+        return new Person(updatedName, updatedPhone, updatedAddress, updatedRegion, updatedTags);
     }
 
     @Override

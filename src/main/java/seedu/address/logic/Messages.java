@@ -24,7 +24,7 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
-    public static final ProductList menu = new ProductList();
+    public static final ProductList MENU = new ProductList();
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -63,15 +63,23 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append("Order ID: ")
                 .append(orderMap.getOrderId())
-                .append("Customer: ")
-                .append(Messages.format(orderMap.getPerson()))
+                .append("; Customer: ")
+                .append(orderMap.getPerson().getName())
                 .append("; Date/Time: ")
                 .append(orderMap.getOrderDatetime())
                 .append("; Status: ")
                 .append(orderMap.getStatus())
-                .append("; Order Map: ");
+                .append("; Items: ");
+
+        boolean first = true;
+
         for (Map.Entry<Integer, Integer> entry : orderMap.getOrderMap().entrySet()) {
-            Product product = menu.getItem(entry.getKey());
+            if (!first) {
+                builder.append(", ");
+            }
+            first = false;
+
+            Product product = MENU.getItem(entry.getKey());
             int quantity = entry.getValue();
             builder.append(String.format(
                     "%s [%d] [$%.2f]",

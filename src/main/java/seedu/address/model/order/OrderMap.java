@@ -7,7 +7,14 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
+/**
+ * Represents an order.
+ */
 public class OrderMap {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Orders should be in the form \"MENU_ITEM PRODUCT_QUANTITY\".";
+    public static final String VALIDATION_REGEX = "^\\d+ \\d+$";
+
     private static int idx = 1;
     private final int orderId;
     private final Person person;
@@ -15,16 +22,30 @@ public class OrderMap {
     private final OrderStatus status;
     private final OrderDateTime orderDatetime;
 
+    /**
+     * Create a new OrderMap with the current timestamp.
+     * @param person The customer
+     * @param orderMap The items ordered
+     */
     public OrderMap(Person person, Map<Integer, Integer> orderMap) {
         this.orderId = idx;
         this.person = person;
         this.orderMap = orderMap;
-        idx ++;
+        idx++;
         this.status = OrderStatus.PENDING;
         this.orderDatetime = new OrderDateTime(LocalDateTime.now());
     }
 
-    public OrderMap(int orderId, Person person, Map<Integer, Integer> orderMap, OrderStatus status, OrderDateTime orderDatetime) {
+    /**
+     * Creates a new OrderMap.
+     * @param orderId The order ID
+     * @param person The customer
+     * @param orderMap The items ordered
+     * @param status The status of the order
+     * @param orderDatetime The timestamp
+     */
+    public OrderMap(int orderId, Person person, Map<Integer, Integer> orderMap,
+                    OrderStatus status, OrderDateTime orderDatetime) {
         this.orderId = orderId;
         this.person = person;
         this.orderMap = orderMap;
@@ -32,26 +53,45 @@ public class OrderMap {
         this.orderDatetime = orderDatetime;
     }
 
+    /**
+     * Returns the customer who ordered the order.
+     */
     public Person getPerson() {
         return person;
     }
 
+    /**
+     * Returns the order ID.
+     */
     public int getOrderId() {
         return orderId;
     }
 
+    /**
+     * Returns the order map.
+     */
     public Map<Integer, Integer> getOrderMap() {
         return orderMap;
     }
 
+    /**
+     * Returns the order status.
+     */
     public OrderStatus getStatus() {
         return status;
     }
 
+    /**
+     * Returns the order date-time.
+     */
     public OrderDateTime getOrderDatetime() {
         return orderDatetime;
     }
 
+    /**
+     * Returns true if both orders have the same order ID.
+     * This defines a weaker notion of equality between two orders.
+     */
     public boolean isSameOrder(OrderMap otherOrder) {
         if (otherOrder == this) {
             return true;
@@ -59,6 +99,13 @@ public class OrderMap {
 
         return otherOrder != null
                 && otherOrder.getOrderId() == getOrderId();
+    }
+
+    /**
+     * Returns true if a given string is a valid product + quantity pair.
+     */
+    public static boolean isValidProductQuantityPair(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
