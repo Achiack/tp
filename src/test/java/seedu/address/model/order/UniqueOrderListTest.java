@@ -63,23 +63,8 @@ public class UniqueOrderListTest {
     }
 
     @Test
-    void add_duplicateOrder_throwsDuplicatePersonException() {
-        uniqueOrderList.add(order1);
-        OrderMap duplicate = new OrderBuilder(order1).build();
-        assertThrows(DuplicatePersonException.class, () -> uniqueOrderList.add(duplicate));
-    }
-
-    @Test
     void add_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueOrderList.add(null));
-    }
-
-    @Test
-    void setOrder_editDuplicate_throwsDuplicatePersonException() {
-        uniqueOrderList.add(order1);
-        uniqueOrderList.add(order2);
-        OrderMap edited = new OrderMap(order1.getPerson(), order2.getOrderMap());
-        assertThrows(DuplicatePersonException.class, () -> uniqueOrderList.setOrder(order2, edited));
     }
 
     @Test

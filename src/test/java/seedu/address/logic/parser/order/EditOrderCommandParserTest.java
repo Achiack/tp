@@ -10,6 +10,6 @@ public class EditOrderCommandParserTest {
 
     @Test
     public void parse_returnsCommandInstance() throws Exception {
-        assertTrue(new EditOrderCommandParser().parse("1") instanceof EditOrderCommand);
+        assertTrue(new EditOrderCommandParser().parse(" 1 o/1 1") instanceof EditOrderCommand);
     }
 }

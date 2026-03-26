@@ -41,7 +41,7 @@ public class JsonAdaptedOrderTest {
                 person,
                 items,
                 OrderStatus.PENDING,
-                new OrderDateTime(LocalDateTime.parse("2026-03-10T10:15:3"))
+                new OrderDateTime(LocalDateTime.parse("2026-03-10T10:15:30"))
         );
         ab.addOrder(order);
 

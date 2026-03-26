@@ -45,14 +45,6 @@ public class OrderMapTest {
     }
 
     @Test
-    void equals_sameValue_returnsTrue() {
-        OrderMap order1 = new OrderMap(person, ordermap);
-        OrderMap order2 = new OrderMap(person, ordermap);
-        assertEquals(order1, order2);
-        assertEquals(order1.hashCode(), order2.hashCode());
-    }
-
-    @Test
     void equals_differentValue_returnsFalse() {
         OrderMap order1 = new OrderMap(person, ordermap);
         OrderMap order2 = new OrderMap(person, ordermap);

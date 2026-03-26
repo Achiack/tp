@@ -43,4 +43,9 @@ public class ListOrderCommand extends Command {
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object object) {
+        return object instanceof ListOrderCommand;
+    }
 }

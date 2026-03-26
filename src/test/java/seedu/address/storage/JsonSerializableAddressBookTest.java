@@ -75,7 +75,7 @@ public class JsonSerializableAddressBookTest {
                 person,
                 items,
                 OrderStatus.PENDING,
-                new OrderDateTime(LocalDateTime.parse("2026-03-10T10:15:3"))
+                new OrderDateTime(LocalDateTime.parse("2026-03-10T10:15:30"))
         );
         ab.addOrder(order);
 
@@ -92,7 +92,7 @@ public class JsonSerializableAddressBookTest {
         assertEquals(1, converted.getOrderList().get(0).getOrderId());
         assertEquals("Alice", converted.getOrderList().get(0).getPerson().getName().toString());
         // TODO: Test order map
-        assertEquals("2026-03-10T10:15:3", converted.getOrderList().get(0).getOrderDatetime().toString());
+        assertEquals("2026-03-10T10:15:30", converted.getOrderList().get(0).getOrderDatetime().toString());
     }
 
 }
