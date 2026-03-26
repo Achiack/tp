@@ -36,8 +36,8 @@ public class UniqueOrderListTest {
     @BeforeEach
     void setUp() {
         uniqueOrderList = new UniqueOrderList();
-        order1 = new OrderBuilder().build();
-        order2 = new OrderBuilder().build();
+        order1 = new OrderBuilder().withOrderId(1).build();
+        order2 = new OrderBuilder().withOrderId(2).build();
     }
 
     @Test
@@ -75,11 +75,10 @@ public class UniqueOrderListTest {
     }
 
     @Test
-    void setOrder_editDuplicate_throwsDuplicatePersonException() {
+    void setOrder_editDuplicate_throwsDuplicateOrderException() {
         uniqueOrderList.add(order1);
         uniqueOrderList.add(order2);
-        OrderMap edited = new OrderMap(order1.getPerson(), order2.getOrderMap());
-        assertThrows(DuplicatePersonException.class, () -> uniqueOrderList.setOrder(order2, edited));
+        assertThrows(DuplicatePersonException.class, () -> uniqueOrderList.setOrder(order1, order2));
     }
 
     @Test

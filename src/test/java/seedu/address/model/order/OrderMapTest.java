@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,8 +47,10 @@ public class OrderMapTest {
 
     @Test
     void equals_sameValue_returnsTrue() {
-        OrderMap order1 = new OrderMap(person, ordermap);
-        OrderMap order2 = new OrderMap(person, ordermap);
+        OrderMap order1 = new OrderMap(
+                1, person, ordermap, OrderStatus.PENDING, new OrderDateTime(LocalDateTime.now()));
+        OrderMap order2 = new OrderMap(
+                1, person, ordermap, OrderStatus.PENDING, new OrderDateTime(LocalDateTime.now()));
         assertEquals(order1, order2);
         assertEquals(order1.hashCode(), order2.hashCode());
     }

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +24,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.order.OrderDateTime;
 import seedu.address.model.order.OrderMap;
+import seedu.address.model.order.OrderStatus;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -41,9 +44,12 @@ public class AddOrderCommandTest {
         Map<Integer, Integer> order = new HashMap<>();
         order.put(1, 2);
 
+        OrderMap expectedOrder = new OrderMap(OrderMap.getNextId(), modelStub.person,
+                order, OrderStatus.PENDING, new OrderDateTime(LocalDateTime.now()));
+
         CommandResult commandResult = new AddOrderCommand(1, order).execute(modelStub);
 
-        OrderMap expectedOrder = new OrderMap(modelStub.person, order);
+        OrderMap actualOrder = modelStub.ordersAdded.get(0);
 
         assertEquals(String.format(AddOrderCommand.MESSAGE_SUCCESS, Messages.format(expectedOrder)),
                 commandResult.getFeedbackToUser());

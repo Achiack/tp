@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -62,11 +63,12 @@ public class JsonAdaptedOrder {
      * @throws IllegalValueException if there were any data constraints violated in the adapted order.
      */
     public OrderMap toModelType(Person person) throws IllegalValueException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return new OrderMap(
                 Integer.parseInt(orderId),
                 person,
                 this.orders,
                 OrderStatus.valueOf(status),
-                new OrderDateTime(LocalDateTime.parse(orderDatetime)));
+                new OrderDateTime(LocalDateTime.parse(orderDatetime, formatter)));
     }
 }

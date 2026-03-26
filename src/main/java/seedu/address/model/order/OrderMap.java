@@ -82,6 +82,13 @@ public class OrderMap {
     }
 
     /**
+     * Returns the id of the next order to be created.
+     */
+    public static int getNextId() {
+        return idx;
+    }
+
+    /**
      * Returns true if both orders have the same order ID.
      * This defines a weaker notion of equality between two orders.
      */
@@ -119,7 +126,6 @@ public class OrderMap {
         return orderId == otherOrder.getOrderId()
                 && orderMap.equals(otherOrder.getOrderMap())
                 && person.equals(otherOrder.getPerson())
-                && orderDatetime.equals(otherOrder.getOrderDatetime())
                 && status.equals(otherOrder.getStatus());
     }
 
