@@ -49,10 +49,9 @@ public class AddOrderCommandTest {
 
         CommandResult commandResult = new AddOrderCommand(1, order).execute(modelStub);
 
-        OrderMap.cleanIdx();
-        OrderMap expectedOrder = new OrderMap(modelStub.person, order);
+        OrderMap addedOrder = modelStub.ordersAdded.get(0);
 
-        assertEquals(String.format(AddOrderCommand.MESSAGE_SUCCESS, Messages.format(expectedOrder)),
+        assertEquals(String.format(AddOrderCommand.MESSAGE_SUCCESS, Messages.format(addedOrder)),
                 commandResult.getFeedbackToUser());
         assertEquals(1, modelStub.ordersAdded.size());
     }
