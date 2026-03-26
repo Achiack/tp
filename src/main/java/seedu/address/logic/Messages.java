@@ -1,10 +1,14 @@
 package seedu.address.logic;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.order.OrderMap;
+import seedu.address.model.order.Product;
+import seedu.address.model.order.ProductList;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,6 +22,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+
+    public static final ProductList menu = new ProductList();
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -46,6 +52,33 @@ public class Messages {
                 .append(person.getRegion())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code ordermap} for display to the user.
+     */
+    public static String format(OrderMap orderMap) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Order ID: ")
+                .append(orderMap.getOrderId())
+                .append("; Customer: ")
+                .append(orderMap.getPerson().getName())
+                .append("; Date/Time: ")
+                .append(orderMap.getOrderDatetime().toString())
+                .append("; Status: ")
+                .append(orderMap.getStatus())
+                .append("; Order Map: ");
+        for (Map.Entry<Integer, Integer> entry : orderMap.getOrderMap().entrySet()) {
+            Product product = menu.getItem(entry.getKey());
+            int quantity = entry.getValue();
+            builder.append(String.format(
+                    "%s [%d] [$%.2f] ",
+                    product.getName(),
+                    quantity,
+                    product.getPrice()
+            ));
+        }
         return builder.toString();
     }
 

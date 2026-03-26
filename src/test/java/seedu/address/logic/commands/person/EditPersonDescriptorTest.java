@@ -12,7 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.person.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.person.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {
@@ -60,8 +60,7 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", postalCode="
                 + editPersonDescriptor.getPostalCode().orElse(null) + ", unitNo="
                 + editPersonDescriptor.getUnitNo().orElse(null) + ", region="
-                + editPersonDescriptor.getRegion().orElse(null) + ", orders="
-                + editPersonDescriptor.getOrders().orElse(null) + ", tags="
+                + editPersonDescriptor.getRegion().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
