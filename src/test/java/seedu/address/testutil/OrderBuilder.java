@@ -2,8 +2,11 @@ package seedu.address.testutil;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.order.OrderMap;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
@@ -69,10 +72,10 @@ public class OrderBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Sets the OrderMap of the OrderMap that OrderBuilder is building.
      */
-    public OrderBuilder withOrderMap(String ... orders) {
-        this.orders = SampleDataUtil.parseOrders(orders);
+    public OrderBuilder withOrderMap(List<String> orders) throws ParseException {
+        this.orders = ParserUtil.parseOrders(orders);
         return this;
     }
 

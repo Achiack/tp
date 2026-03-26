@@ -18,10 +18,11 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.order.AddOrderCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderMap;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -29,7 +30,7 @@ public class OrderCommandTest {
 
     @Test
     public void constructor_nullOrder_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new OrderCommand(1, null));
+        assertThrows(NullPointerException.class, () -> new AddOrderCommand(1, null));
     }
 
     @Test
@@ -39,14 +40,14 @@ public class OrderCommandTest {
         Map<Integer, Integer> orderMap = new HashMap<>();
         orderMap.put(1, 2);
 
-        OrderCommand orderCommand = new OrderCommand(1, orderMap);
+        AddOrderCommand orderCommand = new AddOrderCommand(1, orderMap);
 
         CommandResult commandResult = orderCommand.execute(modelStub);
 
-        Order expectedOrder = new Order(modelStub.getFilteredPersonList().get(1), orderMap);
+        OrderMap expectedOrder = new OrderMap(modelStub.getFilteredPersonList().get(1), orderMap);
 
         assertEquals(
-                String.format(OrderCommand.MESSAGE_SUCCESS, Messages.format(expectedOrder)),
+                String.format(AddOrderCommand.MESSAGE_SUCCESS, Messages.format(expectedOrder)),
                 commandResult.getFeedbackToUser()
         );
 
@@ -61,14 +62,14 @@ public class OrderCommandTest {
         Map<Integer, Integer> order2 = new HashMap<>();
         order2.put(2, 3);
 
-        OrderCommand command1 = new OrderCommand(1, order1);
-        OrderCommand command2 = new OrderCommand(2, order2);
+        AddOrderCommand command1 = new AddOrderCommand(1, order1);
+        AddOrderCommand command2 = new AddOrderCommand(2, order2);
 
         // same object
         assertTrue(command1.equals(command1));
 
         // same values
-        OrderCommand command1Copy = new OrderCommand(1, order1);
+        AddOrderCommand command1Copy = new AddOrderCommand(1, order1);
         assertTrue(command1.equals(command1Copy));
 
         // different types
@@ -120,7 +121,7 @@ public class OrderCommandTest {
         }
 
         @Override
-        public void addOrder(Order order) {
+        public void addOrder(OrderMap order) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -140,7 +141,7 @@ public class OrderCommandTest {
         }
 
         @Override
-        public boolean hasOrder(Order order) {
+        public boolean hasOrder(OrderMap order) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -150,7 +151,7 @@ public class OrderCommandTest {
         }
 
         @Override
-        public void deleteOrder(Order target) {
+        public void deleteOrder(OrderMap target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -160,7 +161,7 @@ public class OrderCommandTest {
         }
 
         @Override
-        public void setOrder(Order target, Order editedPerson) {
+        public void setOrder(OrderMap target, OrderMap editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -170,7 +171,7 @@ public class OrderCommandTest {
         }
 
         @Override
-        public ObservableList<Order> getFilteredOrderList() {
+        public ObservableList<OrderMap> getFilteredOrderList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -179,7 +180,7 @@ public class OrderCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        public void updateFilteredOrderList(Predicate<Order> predicate) {
+        public void updateFilteredOrderList(Predicate<OrderMap> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -213,11 +214,11 @@ public class OrderCommandTest {
      * A Model stub that always accepts orders.
      */
     private class ModelStubAcceptingOrderAdded extends ModelStub {
-        final ArrayList<Order> ordersAdded = new ArrayList<>();
+        final ArrayList<OrderMap> ordersAdded = new ArrayList<>();
         private final Person defaultPerson = new PersonBuilder().build();
 
         @Override
-        public void addOrder(Order order) {
+        public void addOrder(OrderMap order) {
             requireNonNull(order);
             ordersAdded.add(order);
         }

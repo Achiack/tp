@@ -23,14 +23,14 @@ import seedu.address.testutil.PersonBuilder;
 public class UniqueOrderListTest {
 
     private UniqueOrderList uniqueOrderList;
-    private Order order1;
-    private Order order2;
+    private OrderMap order1;
+    private OrderMap order2;
 
     @Test
     public void addOrder_orderAdded() {
         ModelManager model = new ModelManager();
         Person person = new PersonBuilder().build();
-        Order order = new OrderBuilder().build();
+        OrderMap order = new OrderBuilder().build();
 
         model.addOrder(order);
 
@@ -71,7 +71,7 @@ public class UniqueOrderListTest {
     @Test
     void add_duplicateOrder_throwsDuplicatePersonException() {
         uniqueOrderList.add(order1);
-        Order duplicate = new OrderBuilder(order1).build();
+        OrderMap duplicate = new OrderBuilder(order1).build();
         assertThrows(DuplicatePersonException.class, () -> uniqueOrderList.add(duplicate));
     }
 
@@ -84,7 +84,7 @@ public class UniqueOrderListTest {
     void setOrder_editDuplicate_throwsDuplicatePersonException() {
         uniqueOrderList.add(order1);
         uniqueOrderList.add(order2);
-        Order edited = new Order(order1.getPerson(), order2.getOrders());
+        OrderMap edited = new OrderMap(order1.getPerson(), order2.getOrderMap());
         assertThrows(DuplicatePersonException.class, () -> uniqueOrderList.setOrder(order2, edited));
     }
 
@@ -115,7 +115,7 @@ public class UniqueOrderListTest {
 
     @Test
     void setOrders_listWithDuplicates_throwsDuplicatePersonException() {
-        List<Order> orders = Arrays.asList(order1, order1);
+        List<OrderMap> orders = Arrays.asList(order1, order1);
         assertThrows(DuplicatePersonException.class, () -> uniqueOrderList.setOrders(orders));
     }
 
