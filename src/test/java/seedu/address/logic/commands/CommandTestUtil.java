@@ -55,6 +55,10 @@ public class CommandTestUtil {
     public static final String INVALID_REGION_DESC = " " + PREFIX_REGION + "X"; // 'X' is not a valid region
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    public static final String VALID_ORDER_ONE = "1 1";
+
+    public static final String INVALID_ORDER = "1&1";
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
