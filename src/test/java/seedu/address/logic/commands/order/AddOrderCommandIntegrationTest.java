@@ -3,6 +3,7 @@ package seedu.address.logic.commands.order;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +14,9 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.order.OrderDateTime;
 import seedu.address.model.order.OrderMap;
+import seedu.address.model.order.OrderStatus;
 import seedu.address.model.person.Person;
 
 /**
@@ -37,7 +40,8 @@ public class AddOrderCommandIntegrationTest {
         order.put(2, 3);
 
         Person person = model.getFilteredPersonList().get(index - 1);
-        OrderMap orderToAdd = new OrderMap(person, order);
+        OrderMap orderToAdd = new OrderMap(
+                OrderMap.getNextId(), person, order, OrderStatus.PENDING, new OrderDateTime(LocalDateTime.now()));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addOrder(orderToAdd);

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +24,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.order.OrderDateTime;
 import seedu.address.model.order.OrderMap;
+import seedu.address.model.order.OrderStatus;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -41,9 +44,12 @@ public class AddOrderCommandTest {
         Map<Integer, Integer> order = new HashMap<>();
         order.put(1, 2);
 
+        OrderMap expectedOrder = new OrderMap(OrderMap.getNextId(), modelStub.person,
+                order, OrderStatus.PENDING, new OrderDateTime(LocalDateTime.now()));
+
         CommandResult commandResult = new AddOrderCommand(1, order).execute(modelStub);
 
-        OrderMap expectedOrder = new OrderMap(modelStub.person, order);
+        OrderMap actualOrder = modelStub.ordersAdded.get(0);
 
         assertEquals(String.format(AddOrderCommand.MESSAGE_SUCCESS, Messages.format(expectedOrder)),
                 commandResult.getFeedbackToUser());
@@ -92,31 +98,81 @@ public class AddOrderCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
-        @Override public void setUserPrefs(ReadOnlyUserPrefs userPrefs) { throw new AssertionError(); }
-        @Override public ReadOnlyUserPrefs getUserPrefs() { throw new AssertionError(); }
-        @Override public GuiSettings getGuiSettings() { throw new AssertionError(); }
-        @Override public void setGuiSettings(GuiSettings guiSettings) { throw new AssertionError(); }
-        @Override public Path getAddressBookFilePath() { throw new AssertionError(); }
-        @Override public void setAddressBookFilePath(Path path) { throw new AssertionError(); }
-        @Override public void addPerson(Person person) { throw new AssertionError(); }
-        @Override public void addOrder(OrderMap order) { throw new AssertionError(); }
-        @Override public void setAddressBook(ReadOnlyAddressBook newData) { throw new AssertionError(); }
-        @Override public ReadOnlyAddressBook getAddressBook() { throw new AssertionError(); }
-        @Override public boolean hasPerson(Person person) { throw new AssertionError(); }
-        @Override public boolean hasOrder(OrderMap order) { throw new AssertionError(); }
-        @Override public void deletePerson(Person target) { throw new AssertionError(); }
-        @Override public void deleteOrder(OrderMap target) { throw new AssertionError(); }
-        @Override public void setPerson(Person target, Person editedPerson) { throw new AssertionError(); }
-        @Override public void setOrder(OrderMap target, OrderMap editedOrder) { throw new AssertionError(); }
-        @Override public ObservableList<Person> getFilteredPersonList() { throw new AssertionError(); }
-        @Override public ObservableList<OrderMap> getFilteredOrderList() { throw new AssertionError(); }
-        @Override public void updateFilteredPersonList(Predicate<Person> predicate) { throw new AssertionError(); }
-        @Override public void updateFilteredOrderList(Predicate<OrderMap> predicate) { throw new AssertionError(); }
-        @Override public boolean canUndoAddressBook() { throw new AssertionError(); }
-        @Override public boolean canRedoAddressBook() { throw new AssertionError(); }
-        @Override public void undoAddressBook() { throw new AssertionError(); }
-        @Override public void redoAddressBook() { throw new AssertionError(); }
-        @Override public void commitAddressBook() { throw new AssertionError(); }
+        @Override public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+            throw new AssertionError();
+        }
+        @Override public ReadOnlyUserPrefs getUserPrefs() {
+            throw new AssertionError();
+        }
+        @Override public GuiSettings getGuiSettings() {
+            throw new AssertionError();
+        }
+        @Override public void setGuiSettings(GuiSettings guiSettings) {
+            throw new AssertionError();
+        }
+        @Override public Path getAddressBookFilePath() {
+            throw new AssertionError();
+        }
+        @Override public void setAddressBookFilePath(Path path) {
+            throw new AssertionError();
+        }
+        @Override public void addPerson(Person person) {
+            throw new AssertionError();
+        }
+        @Override public void addOrder(OrderMap order) {
+            throw new AssertionError();
+        }
+        @Override public void setAddressBook(ReadOnlyAddressBook newData) {
+            throw new AssertionError();
+        }
+        @Override public ReadOnlyAddressBook getAddressBook() {
+            throw new AssertionError();
+        }
+        @Override public boolean hasPerson(Person person) {
+            throw new AssertionError();
+        }
+        @Override public boolean hasOrder(OrderMap order) {
+            throw new AssertionError();
+        }
+        @Override public void deletePerson(Person target) {
+            throw new AssertionError();
+        }
+        @Override public void deleteOrder(OrderMap target) {
+            throw new AssertionError();
+        }
+        @Override public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError();
+        }
+        @Override public void setOrder(OrderMap target, OrderMap editedOrder) {
+            throw new AssertionError();
+        }
+        @Override public ObservableList<Person> getFilteredPersonList() {
+            throw new AssertionError();
+        }
+        @Override public ObservableList<OrderMap> getFilteredOrderList() {
+            throw new AssertionError();
+        }
+        @Override public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError();
+        }
+        @Override public void updateFilteredOrderList(Predicate<OrderMap> predicate) {
+            throw new AssertionError();
+        }
+        @Override public boolean canUndoAddressBook() {
+            throw new AssertionError();
+        }
+        @Override public boolean canRedoAddressBook() {
+            throw new AssertionError();
+        }
+        @Override public void undoAddressBook() {
+            throw new AssertionError();
+        }
+        @Override public void redoAddressBook() {
+            throw new AssertionError();
+        }
+        @Override public void commitAddressBook() {
+            throw new AssertionError();
+        }
     }
 
     /**

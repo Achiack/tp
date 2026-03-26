@@ -61,8 +61,7 @@ public class AddPersonCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB + REGION_DESC_BOB
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddPersonCommand(expectedPersonMultipleTags));
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddPersonCommand(expectedPersonMultipleTags));
     }
 
     @Test
@@ -150,10 +149,6 @@ public class AddPersonCommandParserTest {
         // missing region prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB
                 + VALID_REGION_BOB, expectedMessage);
-
-        // missing order prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB
-                + REGION_DESC_BOB, expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_ADDRESS_BOB

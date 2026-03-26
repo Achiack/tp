@@ -11,6 +11,10 @@ import seedu.address.model.person.Person;
  * Represents an order made by a customer in the system.
  */
 public class OrderMap {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Orders should be in the form \"MENU_ITEM PRODUCT_QUANTITY\".";
+    public static final String VALIDATION_REGEX = "^\\d+ \\d+$";
+
     private static int idx = 1;
     private final int orderId;
     private final Person person;
@@ -31,6 +35,23 @@ public class OrderMap {
         idx++;
         this.status = OrderStatus.PENDING;
         this.orderDatetime = new OrderDateTime(LocalDateTime.now());
+    }
+
+    /**
+     * Creates a new OrderMap.
+     * @param orderId The order ID
+     * @param person The customer
+     * @param orderMap The items ordered
+     * @param status The status of the order
+     * @param orderDatetime The timestamp
+     */
+    public OrderMap(int orderId, Person person, Map<Integer, Integer> orderMap,
+                    OrderStatus status, OrderDateTime orderDatetime) {
+        this.orderId = orderId;
+        this.person = person;
+        this.orderMap = orderMap;
+        this.status = status;
+        this.orderDatetime = orderDatetime;
     }
 
     /**
@@ -61,10 +82,15 @@ public class OrderMap {
     }
 
     /**
-     * Checks whether this order is the same as another order based on the unique order ID.
-     *
-     * @param otherOrder The other {@code OrderMap} to compare with.
-     * @return True if both orders have the same order ID, false otherwise.
+     * Returns the id of the next order to be created.
+     */
+    public static int getNextId() {
+        return idx;
+    }
+
+    /**
+     * Returns true if both orders have the same order ID.
+     * This defines a weaker notion of equality between two orders.
      */
     public boolean isSameOrder(OrderMap otherOrder) {
         if (otherOrder == this) {
@@ -73,6 +99,13 @@ public class OrderMap {
 
         return otherOrder != null
                 && otherOrder.getOrderId() == getOrderId();
+    }
+
+    /**
+     * Returns true if a given string is a valid product + quantity pair.
+     */
+    public static boolean isValidProductQuantityPair(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
@@ -93,28 +126,21 @@ public class OrderMap {
         return orderId == otherOrder.getOrderId()
                 && orderMap.equals(otherOrder.getOrderMap())
                 && person.equals(otherOrder.getPerson())
-                && orderDatetime.equals(otherOrder.getOrderDatetime())
                 && status.equals(otherOrder.getStatus());
     }
 
-    /**
-     * Returns an integer hash code for this order based on order ID, customer, and order items.
-     */
     @Override
     public int hashCode() {
         return Objects.hash(orderId, person, orderMap);
     }
 
-    /**
-     * Returns a string representation of this order.
-     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("orderId", orderId)
                 .add("person", person)
                 .add("status", status)
-                .add("orderDatetime", orderDatetime)
+                .add("orderDateTime", orderDatetime)
                 .add("orderMap", orderMap.toString())
                 .toString();
     }

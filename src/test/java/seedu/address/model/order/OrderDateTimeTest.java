@@ -19,7 +19,7 @@ public class OrderDateTimeTest {
     void toString_returnsCorrectValue() {
         LocalDateTime datetime = LocalDateTime.of(2026, 3, 11, 23, 59);
         OrderDateTime orderDateTime = new OrderDateTime(datetime);
-        assertEquals("2026-03-11T23:59", orderDateTime.toString());
+        assertEquals("2026-03-11 23:59", orderDateTime.toString());
     }
 
     @Test
@@ -34,7 +34,7 @@ public class OrderDateTimeTest {
     @Test
     void equals_differentValue_returnsFalse() {
         OrderDateTime a = new OrderDateTime(LocalDateTime.of(2026, 3, 11, 23, 59));
-        OrderDateTime b = new OrderDateTime(LocalDateTime.of(2026, 3, 11, 23, 59));
+        OrderDateTime b = new OrderDateTime(LocalDateTime.of(2026, 3, 11, 23, 58));
         assertNotEquals(a, b);
     }
 }
