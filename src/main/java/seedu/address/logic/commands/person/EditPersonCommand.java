@@ -110,11 +110,9 @@ public class EditPersonCommand extends Command {
         String updatedUnitNo = editPersonDescriptor.getUnitNo().orElse(personToEdit.getAddress().getUnit());
         Address updatedAddress = new Address(updatedPostalCode, updatedUnitNo);
         Region updatedRegion = editPersonDescriptor.getRegion().orElse(personToEdit.getRegion());
-        ArrayList<String> updatedOrders = editPersonDescriptor.getOrders().orElse(personToEdit.getOrders());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedAddress, updatedRegion,
-                updatedOrders, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedAddress, updatedRegion, updatedTags);
     }
 
     @Override
@@ -281,7 +279,6 @@ public class EditPersonCommand extends Command {
                     .add("postalCode", postalCode)
                     .add("unitNo", unitNo)
                     .add("region", region)
-                    .add("orders", order)
                     .add("tags", tags)
                     .toString();
         }

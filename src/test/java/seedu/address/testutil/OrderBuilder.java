@@ -1,120 +1,116 @@
 package seedu.address.testutil;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
-import seedu.address.model.order.Order;
-import seedu.address.model.order.OrderDate;
-import seedu.address.model.order.OrderId;
+import seedu.address.model.order.OrderDateTime;
+import seedu.address.model.order.OrderMap;
 import seedu.address.model.order.OrderStatus;
-import seedu.address.model.order.Price;
-import seedu.address.model.order.Product;
-import seedu.address.model.order.Quantity;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Region;
 
 /**
  * A utility class to help with building Order objects.
  */
 public class OrderBuilder {
 
-    public static final String DEFAULT_ORDER_ID = "1";
-    public static final String DEFAULT_PRODUCT = "Fried Rice";
-    public static final String DEFAULT_QUANTITY = "1";
-    public static final String DEFAULT_PRICE = "5";
-    public static final OrderStatus DEFAULT_STATUS = OrderStatus.PENDING;
-    public static final LocalDate DEFAULT_DATE = LocalDate.of(2026, 3, 10);
+    public static final String DEFAULT_ORDERID = "1";
+    public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_ADDRESS = "123456";
+    public static final String DEFAULT_REGION = "N";
+    public static final String DEFAULT_UNITNO = "#01-01";
+    public static final String DEFAULT_STATUS = "PENDING";
+    public static final String DEFAULT_ORDERDATETIME = "2007-12-03T10:15:30";
 
-    private OrderId orderId;
+    private static final Person DEFAULT_PERSON = new Person(
+            new Name(DEFAULT_NAME),
+            new Phone(DEFAULT_PHONE),
+            new Address(DEFAULT_ADDRESS, DEFAULT_UNITNO),
+            new Region(DEFAULT_REGION),
+            new HashSet<>());
+
+    private static final Map<Integer, Integer> DEFAULT_ORDERMAP = new HashMap<>() {{
+            put(1, 1);
+            put(5, 2);
+        }};
+
+    private int orderId;
     private Person person;
-    private Product product;
-    private Quantity quantity;
-    private Price price;
+    private Map<Integer, Integer> orders;
     private OrderStatus status;
-    private OrderDate orderDate;
+    private OrderDateTime orderDateTime;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code OrderBuilder} with the default details.
      */
     public OrderBuilder() {
-        orderId = new OrderId(DEFAULT_ORDER_ID);
-        product = new Product(DEFAULT_PRODUCT);
-        quantity = new Quantity(DEFAULT_QUANTITY);
-        price = new Price(DEFAULT_PRICE);
-        status = DEFAULT_STATUS;
-        orderDate = new OrderDate(DEFAULT_DATE);
+        orderId = Integer.parseInt(DEFAULT_ORDERID);
+        person = DEFAULT_PERSON;
+        orders = DEFAULT_ORDERMAP;
+        status = OrderStatus.valueOf(DEFAULT_STATUS);
+        orderDateTime = new OrderDateTime(LocalDateTime.parse(DEFAULT_ORDERDATETIME));
     }
 
     /**
      * Initializes the OrderBuilder with the data of {@code orderToCopy}.
      */
-    public OrderBuilder(Order orderToCopy) {
-        orderId = orderToCopy.getOrderId();
+    public OrderBuilder(OrderMap orderToCopy) {
         person = orderToCopy.getPerson();
-        product = orderToCopy.getProduct();
-        quantity = orderToCopy.getQuantity();
-        price = orderToCopy.getPrice();
-        status = orderToCopy.getOrderStatus();
-        orderDate = orderToCopy.getDate();
+        orders = new HashMap<>(orderToCopy.getOrderMap());
+        orderId = orderToCopy.getOrderId();
+        status = orderToCopy.getStatus();
+        orderDateTime = orderToCopy.getOrderDatetime();
     }
 
     /**
-     * Sets the {@code OrderId} of the {@code Order} that we are building.
+     * Sets the {@code orderId} of the {@code OrderMap} we are building.
      */
-    public OrderBuilder withOrderId(String orderId) {
-        this.orderId = new OrderId(orderId);
+    public OrderBuilder withOrderId(int orderId) {
+        this.orderId = orderId;
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Sets the {@code person} of the {@code OrderMap} we are building.
      */
     public OrderBuilder withPerson(Person person) {
         this.person = person;
         return this;
     }
+
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Parses the {@code orders} into a {@code Set<OrderMap>} and set it to the {@code Person} that we are building.
      */
-    public OrderBuilder withProduct(String product) {
-        this.product = new Product(product);
+    public OrderBuilder withOrderMap(String ... orders) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (String order : orders) {
+            String[] pair = order.split(" ", 2);
+            String product = pair[0];
+            String quantity = pair[1];
+            map.put(Integer.parseInt(product), Integer.parseInt(quantity));
+        }
+        this.orders = map;
         return this;
     }
 
-    /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
-     */
-    public OrderBuilder withQuantity(String quantity) {
-        this.quantity = new Quantity(quantity);
-        return this;
+    /** Gets DEFAULT_PERSON. */
+    public Person getDefaultPerson() {
+        return DEFAULT_PERSON;
     }
 
-    /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
-     */
-    public OrderBuilder withPrice(String price) {
-        this.price = new Price(price);
-        return this;
+    /** Gets DEFAULT_ORDERMAP. */
+    public Map<Integer, Integer> getDefaultOrderMap() {
+        return DEFAULT_ORDERMAP;
     }
 
-    /**
-     * Sets the {@code Region} of the {@code Person} that we are building.
-     */
-    public OrderBuilder withStatus(OrderStatus status) {
-        this.status = status;
-        return this;
+    public OrderMap build() {
+        return new OrderMap(orderId, person, orders, status, orderDateTime);
     }
 
-    /**
-     * Sets the orders of the {@code Person} that we are building.
-     */
-    public OrderBuilder withOrderDate(LocalDate date) {
-        this.orderDate = new OrderDate(date);
-        return this;
-    }
-
-    /**
-     * Builds the Order.
-     */
-    public Order build() {
-        return new Order(orderId, person, product, quantity, price, status, orderDate);
-    }
 }
