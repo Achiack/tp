@@ -24,18 +24,22 @@ public class CompleteOrderCommand extends Command {
     private final Index targetIndex;
 
     /**
-     * Creates an AddPersonCommand to add the specified {@code Person}
+     * Creates an CompleteOrderCommand to mark the order as completed.
      */
     public CompleteOrderCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Indicates that CompleteOrderCommand mutates the model.
+     */
     @Override
     public boolean mutatesModel() {
         return true;
     }
 
+    /** Indicates that AddOrderCommand should be recorded. */
     @Override
     public boolean shouldRecordInHistory() {
         return true;

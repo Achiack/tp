@@ -1,5 +1,7 @@
 package seedu.address.logic.commands.order;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORDERS;
@@ -66,5 +68,16 @@ public class CompleteOrderCommandTest {
         CompleteOrderCommand command = new CompleteOrderCommand(Index.fromOneBased(1));
 
         assertCommandFailure(command, model, "Order is already completed");
+    }
+
+    @Test
+    public void execute_undoRedo_modelUpdated() throws Exception {
+        OrderMap orderToComplete = model.getFilteredOrderList().get(0);
+        CompleteOrderCommand command = new CompleteOrderCommand(Index.fromOneBased(1));
+        command.execute(model);
+
+        assert(model.getFilteredOrderList().get(0).getStatus() == OrderStatus.COMPLETED);
+        assertTrue(command.shouldRecordInHistory());
+        assertTrue(command.mutatesModel());
     }
 }
