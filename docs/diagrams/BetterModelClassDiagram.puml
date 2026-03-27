@@ -15,7 +15,7 @@ UniquePersonList -right-> Person
 UniqueOrderList -right-> OrderMap
 
 Person -up-> "*" Tag
-OrderMap -up-> "1" Person
+OrderMap -left-> "1" Person
 
 Person *--> Name
 Person *--> Phone
