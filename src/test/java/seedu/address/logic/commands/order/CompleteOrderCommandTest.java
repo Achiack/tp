@@ -1,9 +1,8 @@
 package seedu.address.logic.commands.order;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORDERS;
 import static seedu.address.testutil.TypicalOrders.getTypicalAddressBook;
 
