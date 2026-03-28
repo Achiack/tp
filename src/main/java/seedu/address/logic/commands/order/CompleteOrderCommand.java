@@ -1,8 +1,6 @@
 package seedu.address.logic.commands.order;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMERIDX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDERS;
 
 import java.util.List;
 
