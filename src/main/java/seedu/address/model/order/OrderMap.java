@@ -1,6 +1,8 @@
 package seedu.address.model.order;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,7 +20,7 @@ public class OrderMap {
     private static int idx = 1;
     private final int orderId;
     private final Person person;
-    private final Set<ProductQuantityPair> productQuantityPairs;
+    private final Set<ProductQuantityPair> productQuantityPairs = new HashSet<>();
     private final OrderStatus status;
     private final OrderDateTime orderDatetime;
 
@@ -31,7 +33,7 @@ public class OrderMap {
     public OrderMap(Person person, Set<ProductQuantityPair> productQuantityPairs) {
         this.orderId = idx;
         this.person = person;
-        this.productQuantityPairs = productQuantityPairs;
+        this.productQuantityPairs.addAll(productQuantityPairs);
         idx++;
         this.status = OrderStatus.PENDING;
         this.orderDatetime = new OrderDateTime(LocalDateTime.now());
@@ -49,7 +51,7 @@ public class OrderMap {
                     OrderStatus status, OrderDateTime orderDatetime) {
         this.orderId = orderId;
         this.person = person;
-        this.productQuantityPairs = productQuantityPairs;
+        this.productQuantityPairs.addAll(productQuantityPairs);
         this.status = status;
         this.orderDatetime = orderDatetime;
     }
@@ -66,9 +68,12 @@ public class OrderMap {
         return orderId;
     }
 
-    /** Returns the mapping of menu item IDs to quantities for this order. */
+    /**
+     * Returns the set of menu items and their corresponding quantities for this order.
+     * @return An unmodifiable view of the order items
+     */
     public Set<ProductQuantityPair> getProductQuantityPairs() {
-        return productQuantityPairs;
+        return Collections.unmodifiableSet(productQuantityPairs);
     }
 
     /** Returns the current status of this order. */

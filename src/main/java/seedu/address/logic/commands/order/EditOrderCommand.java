@@ -107,7 +107,7 @@ public class EditOrderCommand extends Command {
         }
 
         for (ProductQuantityPair item : orderToEdit.getProductQuantityPairs()) {
-            if (!doesitemSetContainProduct(enteredOrders, item.getProduct())) {
+            if (!doesItemSetContainProduct(enteredOrders, item.getProduct())) {
                 updateditemSet.add(item);
             }
         }
@@ -117,13 +117,9 @@ public class EditOrderCommand extends Command {
     /**
      * Returns true if {@code itemSet} contains an entry for {@code product}.
      */
-    private static boolean doesitemSetContainProduct(Set<ProductQuantityPair> itemSet, Product product) {
-        for (ProductQuantityPair productQuantityPair : itemSet) {
-            if (productQuantityPair.getProduct().equals(product)) {
-                return true;
-            }
-        }
-        return false;
+    private static boolean doesItemSetContainProduct(Set<ProductQuantityPair> itemSet, Product product) {
+        return itemSet.stream()
+                .anyMatch(pair -> pair.getProduct().equals(product));
     }
 
     @Override
