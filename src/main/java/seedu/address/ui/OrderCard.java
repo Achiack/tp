@@ -1,13 +1,10 @@
 package seedu.address.ui;
 
-import java.util.Map;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.logic.Messages;
 import seedu.address.model.order.OrderMap;
 import seedu.address.model.order.Product;
 import seedu.address.model.order.ProductQuantityPair;

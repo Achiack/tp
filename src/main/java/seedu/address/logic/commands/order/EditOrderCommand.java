@@ -4,10 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDERS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORDERS;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,7 +18,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.OrderMap;
 import seedu.address.model.order.Product;
-import seedu.address.model.order.ProductList;
 import seedu.address.model.order.ProductQuantityPair;
 
 /**

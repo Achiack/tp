@@ -48,6 +48,11 @@ public class ProductList {
         return index > 0 && index < menu.size() + 1;
     }
 
+    /**
+     * Compares the order of two products in the menu.
+     * @return -1 if {@code p1} comes before {@code p2}, 1 if {@code p1} comes after {@code p2},
+     *      and 0 if {@code p1} and {@code p2} are the same product.
+     */
     public int compare(Product p1, Product p2) {
         Integer i1 = getIndex(p1);
         Integer i2 = getIndex(p2);

@@ -16,7 +16,6 @@ import seedu.address.model.order.OrderMap;
 import seedu.address.model.order.OrderStatus;
 import seedu.address.model.order.ProductQuantityPair;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link OrderMap}.

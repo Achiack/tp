@@ -1,9 +1,7 @@
 package seedu.address.testutil;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import seedu.address.model.order.OrderDateTime;
