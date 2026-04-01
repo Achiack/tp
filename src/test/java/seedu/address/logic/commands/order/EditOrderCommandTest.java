@@ -100,6 +100,15 @@ public class EditOrderCommandTest {
     }
 
     @Test
+    public void execute_invalidOrderIndex_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size() + 1);
+        EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder().withOrderMap("1 0").build();
+        EditOrderCommand editCommand = new EditOrderCommand(outOfBoundIndex, descriptor);
+
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
+    }
+
+    @Test
     public void equals() {
         EditOrderCommand editOrderCommand = new EditOrderCommand(
                 Index.fromOneBased(1), new EditOrderDescriptor());

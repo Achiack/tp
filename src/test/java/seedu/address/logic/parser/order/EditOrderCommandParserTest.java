@@ -6,12 +6,16 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ORDER;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ORDER_ONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.order.EditOrderCommand;
 import seedu.address.logic.commands.person.EditPersonCommand;
 import seedu.address.model.order.OrderMap;
+import seedu.address.model.order.ProductQuantityPair;
 
 public class EditOrderCommandParserTest {
 
@@ -50,6 +54,34 @@ public class EditOrderCommandParserTest {
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_invalidProduct_failure() {
+        Index targetIndex = INDEX_FIRST_ORDER;
+        String preamble = String.valueOf(targetIndex.getOneBased());
+
+        assertParseFailure(parser, preamble + " o/0 1",
+                String.format(Messages.MESSAGE_INVALID_MENU_ITEM, 0));
+        assertParseFailure(parser, preamble + " o/9999 1",
+                String.format(Messages.MESSAGE_INVALID_MENU_ITEM, 9999));
+        assertParseFailure(parser, preamble + " o/-1 1",
+                ProductQuantityPair.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, preamble + " o/A 1",
+                ProductQuantityPair.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidQuantity_failure() {
+        Index targetIndex = INDEX_FIRST_ORDER;
+        String preamble = String.valueOf(targetIndex.getOneBased());
+
+        assertParseFailure(parser, preamble + " o/1 -1",
+                ProductQuantityPair.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, preamble + " o/1",
+                ProductQuantityPair.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, preamble + " o/1 A",
+                ProductQuantityPair.MESSAGE_CONSTRAINTS);
     }
 
     @Test

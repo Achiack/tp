@@ -44,7 +44,8 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CUSTOMERIDX);
         int index = Integer.parseInt(argMultimap.getValue(PREFIX_CUSTOMERIDX).get());
-        Set<ProductQuantityPair> productQuantityPairs = ParserUtil.parseOrdersPositiveQuantity(argMultimap.getAllValues(PREFIX_ORDERS));
+        Set<ProductQuantityPair> productQuantityPairs =
+                ParserUtil.parseOrdersPositiveQuantity(argMultimap.getAllValues(PREFIX_ORDERS));
 
         return new AddOrderCommand(index, productQuantityPairs);
     }
