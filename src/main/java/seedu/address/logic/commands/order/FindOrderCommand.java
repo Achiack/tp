@@ -16,8 +16,9 @@ public class FindOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "findorder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all orders whose customer's phone number matches "
-            + "the given phone number and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds all orders whose customer's phone number matches the given phone number "
+            + "and displays them as a list with index numbers.\n"
             + "Parameters: PHONE\n"
             + "Example: " + COMMAND_WORD + " 90813212";
 

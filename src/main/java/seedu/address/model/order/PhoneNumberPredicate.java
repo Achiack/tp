@@ -8,15 +8,15 @@ import seedu.address.commons.util.ToStringBuilder;
  * Tests that an {@code OrderMap}'s person's phone matches the specified phone number.
  */
 public class PhoneNumberPredicate implements Predicate<OrderMap> {
-    private final String phone_num;
+    private final String phoneNum;
 
-    public PhoneNumberPredicate(String phone_num) {
-        this.phone_num = phone_num;
+    public PhoneNumberPredicate(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 
     @Override
     public boolean test(OrderMap order) {
-        return order.getPerson().getPhone().toString().equals(phone_num);
+        return order.getPerson().getPhone().toString().equals(phoneNum);
     }
 
     @Override
@@ -31,11 +31,11 @@ public class PhoneNumberPredicate implements Predicate<OrderMap> {
         }
 
         PhoneNumberPredicate otherPredicate = (PhoneNumberPredicate) other;
-        return phone_num.equals(otherPredicate.phone_num);
+        return phoneNum.equals(otherPredicate.phoneNum);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("phone_num", phone_num).toString();
+        return new ToStringBuilder(this).add("phoneNum", phoneNum).toString();
     }
 }
