@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.order.PhoneNumberPredicate;
 
 /**
- * Finds and lists all orders in address book whose customer's phone number matches the given phone number.
+ * Deletes all orders in address book whose customer's phone number matches the given phone number.
  */
 public class DeleteOrderByPhoneNumberCommand extends Command {
 
