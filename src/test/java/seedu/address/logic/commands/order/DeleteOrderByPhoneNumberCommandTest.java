@@ -24,13 +24,15 @@ public class DeleteOrderByPhoneNumberCommandTest {
 
     @Test
     public void execute_matchingPhone_deletesAllMatchingOrders() {
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
         OrderMap extraOrder = new OrderBuilder(TypicalOrders.ALICE_ORDER).withOrderId(99).build();
         model.addOrder(extraOrder);
+        expectedModel.addOrder(extraOrder);
 
         PhoneNumberPredicate predicate = new PhoneNumberPredicate("94351253");
         long expectedDeletedCount = model.getAddressBook().getOrderList().stream().filter(predicate).count();
         DeleteOrderByPhoneNumberCommand command = new DeleteOrderByPhoneNumberCommand(predicate);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteOrderByPredicate(predicate);
         CommandResult expectedResult = new CommandResult(
                 String.format(DeleteOrderByPhoneNumberCommand.MESSAGE_DELETE_ORDERS_BY_PHONE_SUCCESS,
