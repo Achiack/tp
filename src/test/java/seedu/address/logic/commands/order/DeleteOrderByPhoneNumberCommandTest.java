@@ -30,7 +30,9 @@ public class DeleteOrderByPhoneNumberCommandTest {
         PhoneNumberPredicate predicate = new PhoneNumberPredicate("94351253");
         DeleteOrderByPhoneNumberCommand command = new DeleteOrderByPhoneNumberCommand(predicate);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        OrderMap expectedExtraOrder = new OrderBuilder(TypicalOrders.ALICE_ORDER).withOrderId(99).build();
+        expectedModel.addOrder(expectedExtraOrder);
         expectedModel.deleteOrderByPredicate(predicate);
 
         CommandResult expectedResult = new CommandResult(
