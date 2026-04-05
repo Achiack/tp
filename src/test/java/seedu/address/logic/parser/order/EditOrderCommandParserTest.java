@@ -15,6 +15,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.order.EditOrderCommand;
 import seedu.address.model.order.OrderMap;
 import seedu.address.model.order.ProductQuantityPair;
+import seedu.address.model.order.Quantity;
 
 public class EditOrderCommandParserTest {
 
@@ -76,7 +77,7 @@ public class EditOrderCommandParserTest {
         String preamble = String.valueOf(targetIndex.getOneBased());
 
         assertParseFailure(parser, preamble + " o/1 -1",
-                ProductQuantityPair.MESSAGE_CONSTRAINTS);
+                Quantity.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, preamble + " o/1",
                 ProductQuantityPair.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, preamble + " o/1 A",
