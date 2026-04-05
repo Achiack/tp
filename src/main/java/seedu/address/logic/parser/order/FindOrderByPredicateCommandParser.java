@@ -6,7 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.order.FindOrderByPhoneNumberCommand;
+import seedu.address.logic.commands.order.FindOrderByRegionCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -22,14 +24,14 @@ import seedu.address.model.person.Region;
  * Parses input arguments for the {@code findorder} command and creates a
  * {@link seedu.address.logic.commands.order.FindOrderByPhoneNumberCommand} when {@code p/} is supplied.
  */
-public class FindOrderByPredicateCommandParser implements Parser<FindOrderByPhoneNumberCommand> {
+public class FindOrderByPredicateCommandParser implements Parser<Command> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the {@code findorder} command
-     * and returns a FindOrderByPhoneNumberCommand object for execution.
+     * and returns a FindOrderByPhoneNumberCommand or FindOrderByRegionCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FindOrderByPhoneNumberCommand parse(String args) throws ParseException {
+    public Command parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_REGION);
 
         if (!isAnyPrefixPresent(argMultimap, PREFIX_PHONE, PREFIX_REGION)
@@ -53,7 +55,7 @@ public class FindOrderByPredicateCommandParser implements Parser<FindOrderByPhon
         }
 
         Region region = ParserUtil.parseRegion(argMultimap.getValue(PREFIX_REGION).get());
-        return new FindOrderByPhoneNumberCommand(new RegionPredicate(region));
+        return new FindOrderByRegionCommand(new RegionPredicate(region));
     }
 
     /**

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.order.FindOrderByPhoneNumberCommand;
+import seedu.address.logic.commands.order.FindOrderByRegionCommand;
 import seedu.address.model.order.PhoneNumberPredicate;
 import seedu.address.model.order.RegionPredicate;
 import seedu.address.model.person.Phone;
@@ -45,8 +46,8 @@ public class FindOrderByPredicateCommandParserTest {
 
     @Test
     public void parse_validRegion_returnsFindOrderByPhoneNumberCommand() {
-        FindOrderByPhoneNumberCommand expectedFindCommand =
-                new FindOrderByPhoneNumberCommand(new RegionPredicate(new Region("N")));
+        FindOrderByRegionCommand expectedFindCommand =
+                new FindOrderByRegionCommand(new RegionPredicate(new Region("N")));
         assertParseSuccess(parser, " r/N", expectedFindCommand);
         assertParseSuccess(parser, " \n r/N \t", expectedFindCommand);
     }
