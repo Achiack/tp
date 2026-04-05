@@ -26,7 +26,7 @@ public class ClearOrderCommand extends Command {
         clearedAddressBook.setOrders(Collections.emptyList());
         model.setAddressBook(clearedAddressBook);
 
-        return new CommandResult(MESSAGE_SUCCESS, false, false, false, true);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, false, false);
     }
 
     @Override

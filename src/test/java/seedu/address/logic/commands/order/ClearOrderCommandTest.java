@@ -26,7 +26,7 @@ public class ClearOrderCommandTest {
         expectedModel.setAddressBook(clearedAddressBook);
 
         assertCommandSuccess(new ClearOrderCommand(), model,
-                new CommandResult(ClearOrderCommand.MESSAGE_SUCCESS, false, false, false, true), expectedModel);
+                new CommandResult(ClearOrderCommand.MESSAGE_SUCCESS, false, false, false, false), expectedModel);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class ClearOrderCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
 
         assertCommandSuccess(new ClearOrderCommand(), model,
-                new CommandResult(ClearOrderCommand.MESSAGE_SUCCESS, false, false, false, true), expectedModel);
+                new CommandResult(ClearOrderCommand.MESSAGE_SUCCESS, false, false, false, false), expectedModel);
     }
 
     @Test
