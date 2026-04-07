@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.order;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMERIDX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDERS;
 
@@ -10,6 +11,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.order.OrderMap;
 import seedu.address.model.order.ProductQuantityPair;

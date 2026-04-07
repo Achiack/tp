@@ -8,6 +8,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,7 +20,7 @@ public class OrderMap {
             "Orders should be in the form \"MENU_ITEM PRODUCT_QUANTITY\".";
     public static final String VALIDATION_REGEX = "^\\d+ \\d+$";
 
-    private static int idx = 1;
+    private static int idx = 1; // Math.max(1, model.getFilteredOrderList().size())
     private final int orderId;
     private final Person person;
     private final Set<ProductQuantityPair> productQuantityPairs = new HashSet<>();
@@ -90,16 +92,19 @@ public class OrderMap {
     /**
      * Returns the id of the next order to be created.
      */
+/*
     public static int getNextId() {
         return idx;
     }
-
+*/
     /**
      * Resets the static order id counter (test helper).
      */
+/*
     public static void cleanIdx() {
         idx = 1;
     }
+ */
 
     /**
      * Returns true if both orders have the same order ID.

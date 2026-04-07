@@ -47,8 +47,16 @@ public class ProductQuantityPair implements Comparable<ProductQuantityPair> {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public void setQuantity(int increment) {
-        quantity = new Quantity(Integer.toString(quantity.getValue() + increment)); }
+    public ProductQuantityPair withNewQuantity(int increment) {
+        int newQuantity = quantity.getValue() + increment;
+        return new ProductQuantityPair(
+                String.format("%d %d",
+                        Messages.MENU.getIndex(product),
+                        newQuantity
+                )
+        );
+    }
+
     /**
      * Returns the Product of a ProductQuantityPair.
      */
