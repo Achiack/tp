@@ -36,6 +36,11 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddPersonCommand parse(String args) throws ParseException {
+        if (args.contains("N/") || args.contains("P/") || args.contains("A/")
+                || args.contains("U/") || args.contains("R/") || args.contains("T/")) {
+            throw new ParseException("Prefixes must be lowercase.");
+        }
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
                         args,

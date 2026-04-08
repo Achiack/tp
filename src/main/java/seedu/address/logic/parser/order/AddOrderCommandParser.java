@@ -32,6 +32,10 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
      * @throws ParseException If the user input does not conform to the expected format or contains invalid values.
      */
     public AddOrderCommand parse(String args) throws ParseException {
+        if (args.contains("C/") || args.contains("O/")) {
+            throw new ParseException("Prefixes must be lowercase.");
+        }
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
                         args,
