@@ -92,19 +92,22 @@ public class OrderMap {
     /**
      * Returns the id of the next order to be created.
      */
-/*
+
     public static int getNextId() {
         return idx;
     }
-*/
+
     /**
      * Resets the static order id counter (test helper).
      */
-/*
+
     public static void cleanIdx() {
         idx = 1;
     }
- */
+
+    public static void setIdx(int newIdx) {
+        idx = newIdx;
+    }
 
     /**
      * Returns true if both orders have the same order ID.

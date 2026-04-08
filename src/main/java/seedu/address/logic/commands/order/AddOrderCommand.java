@@ -57,6 +57,7 @@ public class AddOrderCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) {
+        OrderMap.setIdx(model.getFilteredOrderList().size() + 1);
         Person person = model.getFilteredPersonList().get(index - 1);
         OrderMap toAdd = new OrderMap(person, this.order);
         model.addOrder(toAdd);
