@@ -115,6 +115,16 @@
     -fx-background-color: #faf7f4;
 }
 
+.person-list-view .list-cell:filled:selected,
+.person-list-view:focused .list-cell:filled:focused:selected {
+    -fx-background-color: #fdf0e8;
+}
+
+.order-list-view .list-cell:filled:selected,
+.order-list-view:focused .list-cell:filled:focused:selected {
+    -fx-background-color: #eef7f1;
+}
+
 .list-cell:filled:selected #cardPane {
     -fx-border-color: transparent;
     -fx-border-width: 1;
