@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.format.DateTimeFormatter;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -34,6 +36,9 @@ public class OrderCard extends UiPart<Region> {
     @FXML
     private FlowPane statusTags;
 
+    private static final DateTimeFormatter DISPLAY_FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
     /**
      * Creates an {@code OrderCard} with the given {@code OrderMap} and index to display.
      */
@@ -44,7 +49,7 @@ public class OrderCard extends UiPart<Region> {
         customer.setText(order.getPerson().getName().fullName);
         region.setText(order.getPerson().getRegion().toLabel());
         region.setStyle("-fx-background-color: " + order.getPerson().getRegion().getColour());
-        datetime.setText("At: " + order.getOrderDatetime());
+        datetime.setText("At: " + order.getOrderDatetime().value.format(DISPLAY_FORMATTER));
 
         Label statusLabel = new Label(order.getStatus().toString());
         statusLabel.setStyle("-fx-background-color: " + getStatusColor(order.getStatus()) + ";");
