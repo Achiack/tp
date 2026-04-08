@@ -292,7 +292,7 @@ Examples:
 
 #### Filtering orders by phone number: `findorder`
 
-Finds all orders matching a specific customer phone number.
+Finds active orders matching a specific customer phone number.
 
 Format: `findorder p/PHONE_NUMBER`
 
@@ -305,7 +305,7 @@ Examples:
 
 #### Deleting orders of a specific person: `deleteorderbyphone`
 
-Deletes all orders matching a specific customer phone number.
+Deletes active orders matching a specific customer phone number.
 
 Format: `deleteorderbyphone PHONE_NUMBER`
 
