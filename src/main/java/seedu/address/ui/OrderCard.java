@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.order.OrderMap;
@@ -25,13 +26,13 @@ public class OrderCard extends UiPart<Region> {
     @FXML
     private Label customer;
     @FXML
-    private Label status;
-    @FXML
     private Label datetime;
     @FXML
     private Label region;
     @FXML
     private Label items;
+    @FXML
+    private FlowPane statusTags;
 
     /**
      * Creates an {@code OrderCard} with the given {@code OrderMap} and index to display.
@@ -41,9 +42,13 @@ public class OrderCard extends UiPart<Region> {
         this.order = order;
         id.setText(displayedIndex + ". ");
         customer.setText(order.getPerson().getName().fullName);
-        region.setText("Region: " + order.getPerson().getRegion());
-        status.setText("Status: " + order.getStatus());
+        region.setText(order.getPerson().getRegion().toLabel());
+        region.setStyle("-fx-background-color: " + order.getPerson().getRegion().getColour());
         datetime.setText("At: " + order.getOrderDatetime());
+
+        Label statusLabel = new Label(order.getStatus().toString());
+        statusLabel.setStyle("-fx-background-color: " + getStatusColor(order.getStatus()) + ";");
+        statusTags.getChildren().add(statusLabel);
 
         StringBuilder itemList = new StringBuilder();
         for (ProductQuantityPair entry : order.getProductQuantityPairs()) {
@@ -55,5 +60,16 @@ public class OrderCard extends UiPart<Region> {
             itemList.append(product.getName()).append(" x").append(quantity);
         }
         items.setText(itemList.toString());
+    }
+
+    private String getStatusColor(seedu.address.model.order.OrderStatus status) {
+        switch (status) {
+        case COMPLETED:
+            return "#2C7542";
+        case CANCELLED:
+            return "#8C3B3B";
+        default:
+            return "#B87F23";
+        }
     }
 }
