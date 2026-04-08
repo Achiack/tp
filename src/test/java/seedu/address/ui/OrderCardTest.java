@@ -41,7 +41,7 @@ public class OrderCardTest {
         Parent root = card.getRoot();
         Label regionLabel = (Label) root.lookup("#region");
         assertNotNull(regionLabel);
-        String expected = "Region: " + order.getPerson().getRegion();
+        String expected = order.getPerson().getRegion().toLabel();
         assertEquals(expected, regionLabel.getText());
     }
 
