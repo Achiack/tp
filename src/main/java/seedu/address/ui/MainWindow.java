@@ -135,15 +135,26 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        primaryStage.widthProperty().addListener((obs, oldWidth, newWidth) -> expandWindowVerticallyIfNeeded());
-        primaryStage.heightProperty()
-                .addListener((obs, oldHeight, newHeight) -> expandWindowVerticallyIfNeeded());
+        final boolean[] isExpandWindowVerticallyPending = {false};
+        Runnable requestExpandWindowVerticallyIfNeeded = () -> {
+            if (isExpandWindowVerticallyPending[0]) {
+                return;
+            }
+            isExpandWindowVerticallyPending[0] = true;
+            Platform.runLater(() -> {
+                isExpandWindowVerticallyPending[0] = false;
+                expandWindowVerticallyIfNeeded();
+            });
+        };
+
+        primaryStage.widthProperty()
+                .addListener((obs, oldWidth, newWidth) -> requestExpandWindowVerticallyIfNeeded.run());
 
         Platform.runLater(() -> {
             if (shouldAutoFitWindowOnStartup) {
                 fitWindowToSceneOnStartup();
             } else {
-                expandWindowVerticallyIfNeeded();
+                requestExpandWindowVerticallyIfNeeded.run();
             }
         });
 
