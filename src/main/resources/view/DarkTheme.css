@@ -401,16 +401,16 @@
 }
 
 .scroll-bar {
-    -fx-background-color: #f6e8de;
+    -fx-background-color: #fbf3ee;
 }
 
 .scroll-bar .track {
-    -fx-background-color: #fbeee6;
+    -fx-background-color: #fff8f3;
     -fx-background-radius: 10;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #f3b08a;
+    -fx-background-color: #f8c9ad;
     -fx-background-radius: 10;
     -fx-background-insets: 3;
 }
