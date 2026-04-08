@@ -451,7 +451,7 @@
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
-#resultDisplay .content {
+#resultDisplay {
     -fx-background-color: transparent, #f6f6f6, transparent, #f6f6f6;
     -fx-background-radius: 0;
 }
