@@ -395,6 +395,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: Mark an order as completed**
+
+**MSS**
+
+1.  User requests to list orders.
+2.  Food Bridge shows a list of orders, and the details of the customer who made the order.
+3.  User requests to mark a specific order in the list as completed.
+4.  Food Bridge marks the order as completed.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Food Bridge shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Clear all orders**
+
+**MSS**
+
+1.  User requests to clear all orders.
+2.  Food Bridge removes all orders from the order list.
+3.  Food Bridge shows the list of orders.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The order list is already empty.
+
+    * 2a1. Food Bridge shows a message that there are no orders to clear.
+
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -587,8 +628,8 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `clearorder`<br>
     Expected: All orders are removed from the order list. Status message confirms clearing.
     3. Test case: `clearorder` when order list is already empty<br>
-    Expected: No change to the list. Application remains stable 
-   
+    Expected: No change to the list. Application remains stable
+
 ### Undoing changes
 1. Undo last action
     1. Prerequisites: Perform a modifying command (e.g. `deleteperson 1`).
