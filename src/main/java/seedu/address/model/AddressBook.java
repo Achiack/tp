@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -99,9 +100,23 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     public void setPerson(Person target, Person editedPerson) {
+        requireNonNull(target);
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+
+        List<OrderMap> affectedOrders = new ArrayList<>();
+        for (OrderMap order : orders.asUnmodifiableObservableList()) {
+            if (order.getPerson().equals(target)) {
+                affectedOrders.add(order);
+            }
+        }
+
+        for (OrderMap order : affectedOrders) {
+            OrderMap updatedOrder = new OrderMap(order.getOrderId(), editedPerson,
+                    order.getProductQuantityPairs(), order.getStatus(), order.getOrderDatetime());
+            orders.setOrder(order, updatedOrder);
+        }
     }
 
     /**

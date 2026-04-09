@@ -15,6 +15,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.order.OrderMap;
 import seedu.address.model.order.PhoneNumberPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalOrders;
 
 public class FindOrderByPhoneNumberCommandTest {
@@ -76,6 +78,33 @@ public class FindOrderByPhoneNumberCommandTest {
         assertCommandSuccess(command, localModel,
                 new CommandResult(expectedMessage, false, false, false, true), localExpectedModel);
         assertEquals(1, localModel.getFilteredOrderList().size());
+    }
+
+    @Test
+    public void execute_afterPersonPhoneEdit_filtersWithUpdatedPhone() {
+        Model localModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model localExpectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        Person personToEdit = localModel.getAddressBook().getPersonList().get(0);
+        Person editedPerson = new PersonBuilder(personToEdit).withPhone("91234567").build();
+        localModel.setPerson(personToEdit, editedPerson);
+        localExpectedModel.setPerson(personToEdit, editedPerson);
+
+        PhoneNumberPredicate newPhonePredicate = preparePredicate("91234567");
+        FindOrderByPhoneNumberCommand findNewPhoneCommand = new FindOrderByPhoneNumberCommand(newPhonePredicate);
+        localExpectedModel.updateFilteredOrderList(newPhonePredicate);
+        assertCommandSuccess(findNewPhoneCommand, localModel,
+                new CommandResult(String.format(MESSAGE_ORDERS_LISTED_OVERVIEW, 1), false, false, false, true),
+                localExpectedModel);
+        assertEquals(1, localModel.getFilteredOrderList().size());
+
+        PhoneNumberPredicate oldPhonePredicate = preparePredicate("94351253");
+        FindOrderByPhoneNumberCommand findOldPhoneCommand = new FindOrderByPhoneNumberCommand(oldPhonePredicate);
+        localExpectedModel.updateFilteredOrderList(oldPhonePredicate);
+        assertCommandSuccess(findOldPhoneCommand, localModel,
+                new CommandResult(String.format(MESSAGE_ORDERS_LISTED_OVERVIEW, 0), false, false, false, true),
+                localExpectedModel);
+        assertEquals(0, localModel.getFilteredOrderList().size());
     }
 
     @Test
