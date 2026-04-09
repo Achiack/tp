@@ -73,11 +73,13 @@ Here is an example workflow for a new user getting to know Food Bridge.
 6. [**Edit an order**](#editing-an-order--editorder): The customer changes Caesar Salad (item 5) to Smoked Salmon Bagel (item 6).<br>
     Use `editorder 1 o/5 0 o/6 1` to edit the order. (`1` refers to the first order in the list.)
 
-7. [**Find orders**](#finding-orders-by-region--findorder): Use `findorder r/N` to list all active orders from the North region, or `findorder p/98765432` to list active orders by phone number.
+7. [**Delete an order**](#deleting-an-order--deleteorder): Once the order is completed, use `deleteorder` to delete the order.
 
-8. [**Complete orders by region**](#completing-all-orders-in-a-region--completeregion): Use `completeregion r/N` to mark all North region orders as completed.
+8. [**Find orders**](#finding-orders-by-region--findorder): Use `findorder r/N` to list all active orders from the North region, or `findorder p/98765432` to list active orders by phone number.
 
-9. [**Exit**](#exiting-the-program--exit): Use `exit` to close the application.
+9. [**Complete orders by region**](#completing-all-orders-in-a-region--completeregion): Use `completeregion r/N` to mark all North region orders as completed.
+
+10. [**Exit**](#exiting-the-program--exit): Use `exit` to close the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -315,11 +317,9 @@ Examples:
 
 #### Finding orders by region : `findorder`
 
-Finds all active (incomplete) orders whose customer's region matches the given region.
+Finds all orders whose customer's region matches the given region.
 
 Format: `findorder r/REGION`
-
-* Exactly one of `p/PHONE` or `r/REGION` must be provided.
 
 Examples:
 * `findorder r/N` lists active orders for customers in the `N` region.
