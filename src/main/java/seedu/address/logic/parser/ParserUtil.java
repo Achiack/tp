@@ -11,9 +11,9 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.order.AddOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.order.ProductQuantityPair;
-import seedu.address.model.order.Quantity;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -186,7 +186,7 @@ public class ParserUtil {
         Set<ProductQuantityPair> itemSet = parseOrders(orders);
         for (ProductQuantityPair item : itemSet) {
             if (item.getQuantity().getValue() <= 0) {
-                throw new ParseException(Quantity.MESSAGE_CONSTRAINTS_POSITIVE);
+                throw new ParseException(AddOrderCommand.MESSAGE_ZERO_QUANTITY);
             }
         }
         return itemSet;

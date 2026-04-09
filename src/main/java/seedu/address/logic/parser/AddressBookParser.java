@@ -17,6 +17,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.order.AddOrderCommand;
 import seedu.address.logic.commands.order.ClearOrderCommand;
 import seedu.address.logic.commands.order.CompleteOrderCommand;
+import seedu.address.logic.commands.order.CompleteRegionOrdersCommand;
 import seedu.address.logic.commands.order.DeleteOrderByPhoneNumberCommand;
 import seedu.address.logic.commands.order.DeleteOrderCommand;
 import seedu.address.logic.commands.order.EditOrderCommand;
@@ -32,6 +33,7 @@ import seedu.address.logic.commands.person.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.order.AddOrderCommandParser;
 import seedu.address.logic.parser.order.CompleteOrderCommandParser;
+import seedu.address.logic.parser.order.CompleteRegionOrdersCommandParser;
 import seedu.address.logic.parser.order.DeleteOrderByPhoneNumberCommandParser;
 import seedu.address.logic.parser.order.DeleteOrderCommandParser;
 import seedu.address.logic.parser.order.EditOrderCommandParser;
@@ -105,6 +107,7 @@ public class AddressBookParser {
         case FindPersonCommand.COMMAND_WORD:
             return new FindPersonCommandParser().parse(arguments);
 
+
         case FindOrderByPhoneNumberCommand.COMMAND_WORD:
             return new FindOrderByPredicateCommandParser().parse(arguments);
 
@@ -134,6 +137,8 @@ public class AddressBookParser {
 
         case CompleteOrderCommand.COMMAND_WORD:
             return new CompleteOrderCommandParser().parse(arguments);
+        case CompleteRegionOrdersCommand.COMMAND_WORD:
+            return new CompleteRegionOrdersCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
