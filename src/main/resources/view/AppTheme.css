@@ -477,6 +477,10 @@
     -fx-font-size: 13;
 }
 
+#items {
+    -fx-font-size: 13px;
+}
+
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;
@@ -518,7 +522,8 @@
 
 #statusTags {
     -fx-hgap: 7;
-    -fx-vgap: 3;
+    -fx-vgap: 0;
+    -fx-alignment: center-left;
 }
 
 #statusTags .label {
@@ -528,3 +533,4 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
