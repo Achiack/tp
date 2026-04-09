@@ -14,7 +14,6 @@ import seedu.address.model.order.RegionPredicate;
  */
 public class FindOrderByRegionCommand extends Command {
 
-    public static final String COMMAND_WORD = "findorder";
 
     private final RegionPredicate predicate;
 

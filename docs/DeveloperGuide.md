@@ -176,7 +176,7 @@ This product is for delivery workers of a restaurant in Central Singapore.
 
 **Value proposition**:
 
-Our platform streamlines logistics by tagging orders by region for efficient batch lookups, while providing visual analytics for trending items. While the app identifies customers within the same area for convenience, it does not provide specific route planning for delivery workers.
+Our platform streamlines logistics by tagging orders by region for efficient batch lookups and completion workflows. While the app identifies customers within the same area for convenience, it does not provide specific route planning for delivery workers.
 
 ### User stories
 
@@ -290,29 +290,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. Food Bridge shows an error message.
   * Use case ends.
 
-**Use case: Mark an order as completed**
-
-**MSS**
-
-1.  User requests to list orders.
-2.  Food Bridge shows a list of orders, and the details of the customer who made the order.
-3.  User requests to mark a specific order in the list as completed.
-4.  Food Bridge marks the order as completed.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. Food Bridge shows an error message.
-
-      Use case resumes at step 2.
-
 **Use case: Clear all orders**
 
 **MSS**
@@ -330,8 +307,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. Food Bridge shows a message that there are no orders to clear.
 
       Use case ends.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -558,9 +533,23 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: The app has been launched at least once so that `data/addressbook.json` exists.
+   2. Test case (missing file):
+      1. Close the app.
+      2. Delete `data/addressbook.json`.
+      3. Launch the app.
+      Expected: App starts successfully with sample data and recreates `data/addressbook.json`.
+   3. Test case (corrupted file):
+      1. Close the app.
+      2. Replace `data/addressbook.json` contents with invalid JSON (e.g. `{ invalid json`).
+      3. Launch the app.
+      Expected: App starts successfully with empty data, logs a data loading warning, and does not crash.
 
-1. _{ more test cases …​ }_
+2. Persistence after valid command execution
+
+   1. Prerequisites: App is running.
+   2. Test case: `addperson n/Test User p/91234567 a/123456 r/N`, then close and relaunch the app.
+      Expected: The added contact is present after relaunch.
 
 ## **Appendix: Effort**
 
@@ -586,9 +575,6 @@ Team size: 5
 2. Copy a customer’s phone number from an order card: Currently, users must manually select and copy the phone number, which is slow and error-prone when handling multiple deliveries. We will add a small copy button next to the customer phone line in the order card. Clicking it copies the phone number to the clipboard and shows a brief confirmation in the result display (e.g., `Copied phone number: 98765432`). If the clipboard is unavailable, the result display will show a clear error (e.g., `Unable to copy phone number: clipboard unavailable`) and the UI will remain unchanged.
 3. Show only orders due for delivery today on app launch: Currently, the app shows all orders on startup, which can overwhelm the user when only today’s deliveries matter. We will apply a startup filter that shows only orders whose `orderDatetime` falls on the current local date, and display a one-line hint in the result display (e.g., `Showing orders for today (2026-04-08)`). Users can clear the filter with `listorder`, which restores the full order list. The filter is read-only and does not modify stored order data.
 4. Alert when adding an identical contact: Currently, adding a person who already exists may either succeed or fail with a generic duplicate message, leaving the user unclear about what is duplicated. We will detect an exact duplicate (same name, phone, address, region, tags) and show a specific error: `Contact Amy Lee already exists with the same details.` This will not block partially matching contacts (e.g., same name but different phone), which will continue to be allowed.
-1. **Pin important orders for faster access:** Currently, orders are listed strictly by time and all orders look the same, so important orders can get buried in a long list. We will add a `pinorder INDEX` command that toggles a pinned flag on an existing order and a pin indicator on the order card (a small pin icon and the text `Pinned`). Pinned orders will appear in a dedicated pinned block at the top of the order list, while preserving their relative ordering by `orderDatetime`. Example: after `pinorder 3`, the third order card shows the pin indicator and moves into the pinned block above the unpinned orders.
-2. **Copy a customer’s phone number from an order card:** Currently, users must manually select and copy the phone number, which is slow and error-prone when handling multiple deliveries. We will add a small copy button next to the customer phone line in the order card. Clicking it copies the phone number to the clipboard and shows a brief confirmation in the result display (e.g., `Copied phone number: 98765432`). If the clipboard is unavailable, the result display will show a clear error (e.g., `Unable to copy phone number: clipboard unavailable`) and the UI will remain unchanged.
-3. **Show only orders due for delivery today on app launch:** Currently, the app shows all orders on startup, which can overwhelm the user when only today’s deliveries matter. We will apply a startup filter that shows only orders whose `orderDatetime` falls on the current local date, and display a one-line hint in the result display (e.g., `Showing orders for today (2026-04-08)`). Users can clear the filter with `listorder`, which restores the full order list. The filter is read-only and does not modify stored order data.
 
 --------------------------------------------------------------------------------------------------------------------
 

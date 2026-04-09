@@ -31,7 +31,7 @@ By using simple typed commands, you can manage everything faster than traditiona
 5. Type <code>cd </code> (make sure to include the space), then drag the folder containing the `.jar` file into the terminal window. Press Enter to navigate to the folder.
 
 6. Type `java -jar food-bridge-[version].jar` and press Enter to launch the application.<br>
-    E.g. If you downloaded version 1.4, you should type `java -jar food-bridge-1.4.jar`.<br>
+    E.g. If you downloaded version 1.5, you should type `java -jar food-bridge-1.5.jar`.<br>
      A GUI similar to the below should appear. Note how the app contains some sample data.<br>
          ![Ui](images/Ui.png)
 
