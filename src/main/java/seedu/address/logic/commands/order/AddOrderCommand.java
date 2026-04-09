@@ -56,7 +56,7 @@ public class AddOrderCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) {
-        OrderMap.setIdx(model.getFilteredOrderList().size() + 1);
+        OrderMap.setIdx(model.getAddressBook().getOrderList().size() + 1);
         if (index > model.getFilteredPersonList().size()) {
             return new CommandResult(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         } else {

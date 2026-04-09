@@ -118,7 +118,7 @@ public class OrderMap {
 
         return otherOrder != null
                 && otherOrder.getOrderId() == getOrderId()
-                && otherOrder.getOrderDatetime() == getOrderDatetime();
+                && otherOrder.getOrderDatetime().equals(getOrderDatetime());
     }
 
     /**
