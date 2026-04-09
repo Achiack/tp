@@ -107,6 +107,7 @@ public class AddressBookParserTest {
         assertEquals(new FindPersonCommand(new RegionContainsKeywordsPredicate(keywords)), command);
     }
 
+
     @Test
     public void parseCommand_findOrder() throws Exception {
         assertTrue(parser.parseCommand("findorder p/94351253")

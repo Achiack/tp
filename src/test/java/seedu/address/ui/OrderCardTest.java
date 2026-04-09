@@ -41,7 +41,8 @@ public class OrderCardTest {
         Parent root = card.getRoot();
         Label regionLabel = (Label) root.lookup("#region");
         assertNotNull(regionLabel);
-        assertEquals("Region: N", regionLabel.getText());
+        String expected = "Region: " + order.getPerson().getRegion();
+        assertEquals(expected, regionLabel.getText());
     }
 
     private OrderCard createOrderCard(OrderMap order, int displayedIndex) throws Exception {

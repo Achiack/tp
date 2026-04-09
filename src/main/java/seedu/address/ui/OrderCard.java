@@ -42,8 +42,8 @@ public class OrderCard extends UiPart<Region> {
         this.order = order;
         id.setText(displayedIndex + ". ");
         customer.setText(order.getPerson().getName().fullName);
-        status.setText("Status: " + order.getStatus());
         region.setText("Region: " + order.getPerson().getRegion());
+        status.setText("Status: " + order.getStatus());
         datetime.setText("At: " + order.getOrderDatetime());
 
         for (ProductQuantityPair entry : order.getProductQuantityPairs()) {

@@ -173,7 +173,17 @@ public interface Model {
     void redoAddressBook();
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Returns the command text that will be undone next.
      */
-    void commitAddressBook();
+    String getUndoCommandText();
+
+    /**
+     * Returns the command text that will be redone next.
+     */
+    String getRedoCommandText();
+
+    /**
+     * Saves the current address book state for undo/redo with the command that created it.
+     */
+    void commitAddressBook(String commandText);
 }
