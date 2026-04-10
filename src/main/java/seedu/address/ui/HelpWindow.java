@@ -5,21 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.Objects;
 import java.util.logging.Logger;
-
-import org.commonmark.Extension;
-import org.commonmark.ext.gfm.tables.TablesExtension;
-import org.commonmark.node.Node;
-import org.commonmark.parser.Parser;
-import org.commonmark.renderer.html.HtmlRenderer;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -35,8 +26,6 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String FXML = "HelpWindow.fxml";
 
     private static final String USER_GUIDE_LOCAL_PATH = "/docs/UserGuide.md";
-    private static final String CONTENT_STYLE_PATH = "/view/HelpWindowContent.css";
-
     @FXML
     private Hyperlink hyperlink;
 
@@ -44,7 +33,7 @@ public class HelpWindow extends UiPart<Stage> {
     private Label helpMessage;
 
     @FXML
-    private WebView commandList;
+    private TextArea commandList;
 
     /**
      * Creates a new HelpWindow.
@@ -55,12 +44,8 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
 
         helpMessage.setText(HELP_MESSAGE);
-
-        String commandSummaryMarkdown = getCommandSummary();
-        String commandSummaryHtml = markdownToHtml(commandSummaryMarkdown);
-
-        WebEngine webEngine = commandList.getEngine();
-        webEngine.loadContent(commandSummaryHtml);
+        commandList.setText(getCommandSummary());
+        commandList.positionCaret(0);
     }
 
     /**
@@ -116,38 +101,6 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Turns the given Markdown string to HTML.
-     */
-    private String markdownToHtml(String markdown) {
-        List<Extension> extensions = List.of(TablesExtension.create());
-        Parser parser = Parser.builder()
-                .extensions(extensions)
-                .build();
-        HtmlRenderer renderer = HtmlRenderer.builder()
-                .extensions(extensions)
-                .build();
-        Node document = parser.parse(markdown);
-        String body = renderer.render(document);
-
-        String cssUrl = Objects.requireNonNull(getClass()
-                        .getResource(CONTENT_STYLE_PATH))
-                        .toExternalForm();
-
-        return """
-        <html>
-        <head>
-            <link rel="stylesheet" href="
-            """ + cssUrl + """
-        ">
-        </head>
-        <body>
-            """ + body + """
-        </body>
-        </html>
-            """;
-    }
-
-    /**
      * Returns the Markdown string of the command summary from the user guide.
      */
     private String getCommandSummary() {
@@ -159,7 +112,7 @@ public class HelpWindow extends UiPart<Stage> {
 
         if (startIndex == -1) {
             logger.info("Could not find command summary in user guide.");
-            return null;
+            return "Command summary section not found in User Guide.";
         }
 
         return markdown.substring(startIndex);
