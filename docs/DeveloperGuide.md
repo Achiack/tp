@@ -270,7 +270,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. Food Bridge shows an error message.
   * Use case resumes at step 1.
 
-* 2a. The order is already completed or cancelled.
+* 2a. The order is already completed.
   * 2a1. Food Bridge shows an error message.
   * Use case resumes at step 1.
 
